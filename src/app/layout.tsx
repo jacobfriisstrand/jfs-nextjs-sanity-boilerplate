@@ -18,6 +18,7 @@ export default function RootLayout({
         className="antialiased"
       >
         {children}
+        Non frontend layout
       </body>
     </html>
   );
