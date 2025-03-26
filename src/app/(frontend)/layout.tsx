@@ -1,6 +1,6 @@
 import { SanityLive } from "@/sanity/lib/live";
 
-export default function FrontendLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
