@@ -1,24 +1,14 @@
-import type { Metadata } from "next";
+import { SanityLive } from "@/sanity/lib/live";
 
-import "@/app/globals.css";
-
-export const metadata: Metadata = {
-  title: "Next.js boilerplate",
-  description: "Created by Jacob Friis Strand",
-};
-
-export default function RootLayout({
+export default function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className="antialiased"
-      >
-        {children}
-      </body>
-    </html>
+    <>
+      {children}
+      <SanityLive />
+    </>
   );
 }
