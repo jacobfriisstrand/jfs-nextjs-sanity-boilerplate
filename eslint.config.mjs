@@ -6,6 +6,7 @@ export default antfu(
     typescript: true,
     formatters: true,
     react: true,
+    yaml: true,
     stylistic: {
       indent: 2,
       semi: true,
@@ -32,6 +33,8 @@ export default antfu(
           ignore: ["README.md"],
         },
       ],
+      "yaml/no-multiple-empty-lines": ["error", { max: 1 }],
+      "yaml/quotes": ["error", { prefer: "double" }],
     },
   },
 );
