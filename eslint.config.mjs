@@ -12,6 +12,7 @@ export default antfu(
       semi: true,
       quotes: "double",
     },
+    ignores: ["src/sanity/types.ts"],
   },
   {
     rules: {
