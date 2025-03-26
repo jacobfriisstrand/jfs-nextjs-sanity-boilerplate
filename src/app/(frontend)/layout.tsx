@@ -9,7 +9,6 @@ export default function RootLayout({
     <>
       {children}
       <SanityLive />
-      Frontend layout
     </>
   );
 }
