@@ -25,7 +25,6 @@ export const blockContentType = defineType({
       // use your content.
       styles: [
         { title: "Normal", value: "normal" },
-        { title: "H1", value: "h1" },
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
@@ -65,6 +64,11 @@ export const blockContentType = defineType({
       icon: ImageIcon,
       options: { hotspot: true },
       fields: [
+        {
+          name: "caption",
+          type: "string",
+          title: "Caption",
+        },
         {
           name: "alt",
           type: "string",
