@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ResponsiveImage } from "@/components/ui/responsive-image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
 
@@ -20,6 +21,13 @@ export default async function Page({
 
   return (
     <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
+      {post?.mainImage?.asset && (
+        <ResponsiveImage
+          image={post.mainImage}
+          className="aspect-[1/1] max-h-[500px]"
+          priority
+        />
+      )}
       <h1 className="text-4xl font-bold text-balance">{post?.title}</h1>
       <hr />
       <Link href="/posts">&larr; Return to index</Link>
