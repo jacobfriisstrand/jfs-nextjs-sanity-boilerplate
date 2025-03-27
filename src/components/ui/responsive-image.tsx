@@ -2,6 +2,8 @@ import type { ImageProps } from "next/image";
 
 import Image from "next/image";
 
+import type { SanityImageCrop, SanityImageHotspot } from "@/sanity/types";
+
 import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -31,18 +33,8 @@ type SanityImageObject = {
       } | null;
     } | null;
   } | null;
-  hotspot: {
-    x: number | null;
-    y: number | null;
-    height: number | null;
-    width: number | null;
-  } | null;
-  crop: {
-    top: number | null;
-    bottom: number | null;
-    left: number | null;
-    right: number | null;
-  } | null;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
   alt?: string;
 };
 

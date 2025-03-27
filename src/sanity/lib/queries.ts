@@ -1,20 +1,8 @@
 import { defineQuery } from "next-sanity";
 
 export const IMAGE_QUERY = defineQuery(`{
-  _type,
-  hotspot {
-    x,
-    y,
-    height,
-    width
-  },
-  crop {
-    top,
-    bottom,
-    left,
-    right
-  },
-  asset->{
+  ...,
+  asset-> {
     _id,
     _type,
     url,
