@@ -48,8 +48,6 @@ export function ResponsiveImage({
   // Create the image URL while preserving all Sanity image settings
   const imageUrl = builder(urlFor(image)).url();
 
-  console.log(image);
-
   return (
     <div className={cn("relative w-full", className)}>
       <Image
