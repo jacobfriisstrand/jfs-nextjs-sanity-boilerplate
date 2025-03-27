@@ -281,6 +281,14 @@ export type SanityImageMetadata = {
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
+// Variable: IMAGE_QUERY
+// Query: {  _type,  hotspot {    x,    y,    height,    width  },  crop {    top,    bottom,    left,    right  },  asset->{    _id,    _type,    url,    metadata {      lqip,      dimensions {        aspectRatio,        height,        width      }    }  }}
+export type IMAGE_QUERYResult = {
+  _type: never;
+  hotspot: never;
+  crop: never;
+  asset: never;
+};
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug}
 export type POSTS_QUERYResult = Array<{
@@ -289,7 +297,7 @@ export type POSTS_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage {  _type,  hotspot {    x,    y,    height,    width  },  crop {    top,    bottom,    left,    right  },  asset->{    _id,    _type,    url,    metadata {      lqip,      dimensions {        aspectRatio,        height,        width      }    }  }}}
 export type POST_QUERYResult = {
   title: string | null;
   body: Array<{
@@ -323,16 +331,32 @@ export type POST_QUERYResult = {
     _key: string;
   }> | null;
   mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
     _type: "image";
+    hotspot: {
+      x: number | null;
+      y: number | null;
+      height: number | null;
+      width: number | null;
+    } | null;
+    crop: {
+      top: number | null;
+      bottom: number | null;
+      left: number | null;
+      right: number | null;
+    } | null;
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      url: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          aspectRatio: number | null;
+          height: number | null;
+          width: number | null;
+        } | null;
+      } | null;
+    } | null;
   } | null;
 } | null;
 
@@ -340,7 +364,8 @@ export type POST_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "{\n  _type,\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n  crop {\n    top,\n    bottom,\n    left,\n    right\n  },\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        aspectRatio,\n        height,\n        width\n      }\n    }\n  }\n}": IMAGE_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage {\n  _type,\n  hotspot {\n    x,\n    y,\n    height,\n    width\n  },\n  crop {\n    top,\n    bottom,\n    left,\n    right\n  },\n  asset->{\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        aspectRatio,\n        height,\n        width\n      }\n    }\n  }\n}\n}": POST_QUERYResult;
   }
 }

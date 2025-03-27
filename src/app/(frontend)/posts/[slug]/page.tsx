@@ -21,7 +21,7 @@ export default async function Page({
 
   return (
     <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
-      {post?.mainImage && (
+      {post?.mainImage?.asset && (
         <ResponsiveImage
           image={post.mainImage}
           className="aspect-[1/1] max-h-[500px]"

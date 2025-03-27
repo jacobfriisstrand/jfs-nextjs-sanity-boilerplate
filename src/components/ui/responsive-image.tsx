@@ -1,4 +1,3 @@
-import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
 import type { ImageProps } from "next/image";
 
 import Image from "next/image";
@@ -6,7 +5,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
-type SanityImageAsset = {
+export type SanityImageAsset = {
   _id: string;
   url: string;
   path: string;
@@ -17,12 +16,38 @@ type SanityImageAsset = {
   };
 };
 
-type SanityImageWithAlt = SanityImageObject & {
+type SanityImageObject = {
+  _type: "image";
+  asset: {
+    _id: string;
+    _type: "sanity.imageAsset";
+    url: string | null;
+    metadata: {
+      lqip: string | null;
+      dimensions: {
+        aspectRatio: number | null;
+        height: number | null;
+        width: number | null;
+      } | null;
+    } | null;
+  } | null;
+  hotspot: {
+    x: number | null;
+    y: number | null;
+    height: number | null;
+    width: number | null;
+  } | null;
+  crop: {
+    top: number | null;
+    bottom: number | null;
+    left: number | null;
+    right: number | null;
+  } | null;
   alt?: string;
 };
 
 type ResponsiveImageProps = Omit<ImageProps, "src" | "alt" | "fill" | "sizes" | "placeholder" | "blurDataURL"> & {
-  image: SanityImageWithAlt & { asset: SanityImageAsset };
+  image: SanityImageObject;
   className: string;
   priority?: boolean;
   builder?: (builder: ReturnType<typeof urlFor>) => ReturnType<typeof urlFor>;
@@ -42,11 +67,11 @@ export function ResponsiveImage({
   builder = defaultBuilder,
   ...props
 }: ResponsiveImageProps) {
-  if (!image)
+  if (!image?.asset)
     return null;
 
-  // Create the image URL while preserving all Sanity image settings
   const imageUrl = builder(urlFor(image)).url();
+  const lqip = image.asset.metadata?.lqip;
 
   return (
     <div className={cn("relative w-full", className)}>
@@ -57,8 +82,12 @@ export function ResponsiveImage({
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, (max-width: 1920px) 100vw, 1920px"
         priority={priority}
-        placeholder="blur"
-        blurDataURL={image.asset.metadata?.lqip}
+        {...(lqip
+          ? {
+              placeholder: "blur",
+              blurDataURL: lqip,
+            }
+          : {})}
         className="object-cover"
       />
     </div>
