@@ -593,10 +593,6 @@
                         },
                         {
                           "type": "string",
-                          "value": "h1"
-                        },
-                        {
-                          "type": "string",
                           "value": "h2"
                         },
                         {
@@ -738,6 +734,13 @@
                     "value": {
                       "type": "inline",
                       "name": "sanity.imageCrop"
+                    },
+                    "optional": true
+                  },
+                  "caption": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
                     },
                     "optional": true
                   },
@@ -1189,10 +1192,6 @@
                     },
                     {
                       "type": "string",
-                      "value": "h1"
-                    },
-                    {
-                      "type": "string",
                       "value": "h2"
                     },
                     {
@@ -1334,6 +1333,13 @@
                 "value": {
                   "type": "inline",
                   "name": "sanity.imageCrop"
+                },
+                "optional": true
+              },
+              "caption": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
                 },
                 "optional": true
               },

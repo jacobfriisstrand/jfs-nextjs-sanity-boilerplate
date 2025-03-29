@@ -2,7 +2,7 @@ import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ResponsiveImage } from "@/components/ui/responsive-image";
+import { SanityImage } from "@/components/ui/sanity-image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { components } from "@/sanity/portable-text-components";
@@ -23,12 +23,11 @@ export default async function Page({
 
   return (
     <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
-
       {post?.mainImage && (
-        <ResponsiveImage
+        <SanityImage
           image={post.mainImage}
-          className="aspect-[2/1]"
           priority
+          aspectRatio={16 / 9}
         />
       )}
       <h1 className="text-4xl font-bold text-balance">{post?.title}</h1>
