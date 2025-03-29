@@ -744,13 +744,6 @@
                     },
                     "optional": true
                   },
-                  "fullWidth": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "boolean"
-                    },
-                    "optional": true
-                  },
                   "alt": {
                     "type": "objectAttribute",
                     "value": {
@@ -1347,13 +1340,6 @@
                 "type": "objectAttribute",
                 "value": {
                   "type": "string"
-                },
-                "optional": true
-              },
-              "fullWidth": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "boolean"
                 },
                 "optional": true
               },

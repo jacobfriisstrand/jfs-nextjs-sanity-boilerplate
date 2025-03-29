@@ -6,40 +6,56 @@ import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
 type SanityImage = {
+  _type: "image";
   asset: {
     _id: string;
     _type: "sanity.imageAsset";
-    url: string;
+    url: string | null;
     metadata: {
-      lqip: string;
-    };
+      lqip: string | null;
+    } | null;
     dimensions: {
       _type: "sanity.imageDimensions";
       aspectRatio: number;
       height: number;
       width: number;
-    };
-  };
-  alt: string;
+    } | null;
+  } | null;
+  alt: string | null;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
 };
 
-type SanityImageProps = Omit<ImageProps, "src"> & {
+type SanityImageHotspot = {
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+type SanityImageCrop = {
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+type SanityImageProps = Omit<ImageProps, "src" | "alt"> & {
   image: SanityImage;
   quality?: number;
   aspectRatio?: number;
-
 };
 
 export function SanityImage({
   image,
   quality = 80,
   aspectRatio,
-
   className,
   ...props
 }: SanityImageProps) {
-  if (!image?.asset)
+  if (!image?.asset?.url) {
     return null;
+  }
 
   // Calculate dimensions based on aspect ratio
   let width = 800; // Default width
@@ -68,6 +84,7 @@ export function SanityImage({
         .url()}
       width={width}
       height={height}
+      alt={image.alt || ""}
       {...props}
     />
   );

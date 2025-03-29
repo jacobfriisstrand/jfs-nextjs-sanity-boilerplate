@@ -28,7 +28,6 @@ export default async function Page({
           image={post.mainImage}
           priority
           aspectRatio={16 / 9}
-          alt={post.mainImage.alt}
         />
       )}
       <h1 className="text-4xl font-bold text-balance">{post?.title}</h1>

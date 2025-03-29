@@ -11,7 +11,6 @@ export const components: PortableTextComponents = {
               <SanityImage
                 className="not-prose w-full h-auto"
                 image={props.value}
-                alt={props.value.alt}
               />
               {props.value.caption && (
                 <p className="text-sm mt-2 text-gray-600 italic">
