@@ -2,17 +2,19 @@ import { defineQuery } from "next-sanity";
 
 export const IMAGE_QUERY = defineQuery(`{
   ...,
+  alt,
   asset-> {
     _id,
     _type,
     url,
     metadata {
-      lqip,
-      dimensions {
-        aspectRatio,
-        height,
-        width
-      }
+      lqip
+    },
+    dimensions {
+      _type,
+      aspectRatio,
+      height,
+      width
     }
   }
 }`);

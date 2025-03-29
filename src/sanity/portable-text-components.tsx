@@ -1,23 +1,24 @@
 import type { PortableTextComponents } from "next-sanity";
 
-import { ResponsiveImage } from "@/components/ui/responsive-image";
+import { SanityImage } from "@/components/ui/sanity-image";
 
 export const components: PortableTextComponents = {
   types: {
     image: props =>
       props.value
         ? (
-            <div className="flex flex-col gap-6">
-              <ResponsiveImage
+            <>
+              <SanityImage
+                className="not-prose w-full h-auto"
                 image={props.value}
-                className="aspect-square"
+                alt={props.value.alt}
               />
               {props.value.caption && (
-                <p className="text-sm text-gray-600 italic">
+                <p className="text-sm mt-2 text-gray-600 italic">
                   {props.value.caption}
                 </p>
               )}
-            </div>
+            </>
           )
         : null,
   },

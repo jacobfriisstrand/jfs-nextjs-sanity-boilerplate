@@ -109,7 +109,7 @@ export type Post = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
     listItem?: "bullet";
     markDefs?: Array<{
       href?: string;
@@ -128,6 +128,8 @@ export type Post = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    caption?: string;
+    fullWidth?: boolean;
     alt?: string;
     _type: "image";
     _key: string;
@@ -197,7 +199,7 @@ export type BlockContent = Array<{
     _type: "span";
     _key: string;
   }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+  style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
   listItem?: "bullet";
   markDefs?: Array<{
     href?: string;
@@ -216,6 +218,8 @@ export type BlockContent = Array<{
   };
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
+  caption?: string;
+  fullWidth?: boolean;
   alt?: string;
   _type: "image";
   _key: string;
@@ -282,7 +286,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: IMAGE_QUERY
-// Query: {  ...,  asset-> {    _id,    _type,    url,    metadata {      lqip,      dimensions {        aspectRatio,        height,        width      }    }  }}
+// Query: {  ...,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }}
 export type IMAGE_QUERYResult = never;
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug}
@@ -292,7 +296,7 @@ export type POSTS_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage {  ...,  asset-> {    _id,    _type,    url,    metadata {      lqip,      dimensions {        aspectRatio,        height,        width      }    }  }}}
+// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage {  ...,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }}}
 export type POST_QUERYResult = {
   title: string | null;
   body: Array<{
@@ -302,7 +306,7 @@ export type POST_QUERYResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
     listItem?: "bullet";
     markDefs?: Array<{
       href?: string;
@@ -321,6 +325,8 @@ export type POST_QUERYResult = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    caption?: string;
+    fullWidth?: boolean;
     alt?: string;
     _type: "image";
     _key: string;
@@ -332,12 +338,8 @@ export type POST_QUERYResult = {
       url: string | null;
       metadata: {
         lqip: string | null;
-        dimensions: {
-          aspectRatio: number | null;
-          height: number | null;
-          width: number | null;
-        } | null;
       } | null;
+      dimensions: null;
     } | null;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -350,8 +352,8 @@ export type POST_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "{\n  ...,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        aspectRatio,\n        height,\n        width\n      }\n    }\n  }\n}": IMAGE_QUERYResult;
+    "{\n  ...,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}": IMAGE_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage {\n  ...,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip,\n      dimensions {\n        aspectRatio,\n        height,\n        width\n      }\n    }\n  }\n}\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage {\n  ...,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n}": POST_QUERYResult;
   }
 }
