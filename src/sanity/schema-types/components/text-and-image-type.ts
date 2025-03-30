@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity";
 
-export const splitImageType = defineType({
-  name: "splitImage",
+export const textAndImageType = defineType({
+  name: "textAndImage",
   type: "object",
   fields: [
     defineField({
