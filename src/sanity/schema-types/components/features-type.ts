@@ -29,4 +29,15 @@ export const featuresType = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare({ title }) {
+      return {
+        title,
+        subtitle: "Features",
+      };
+    },
+  },
 });

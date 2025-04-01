@@ -31,7 +31,7 @@ export const textAndImageType = defineType({
     prepare({ title, media }) {
       return {
         title,
-        subtitle: "Text and Image",
+        subtitle: "Split Image",
         media,
       };
     },

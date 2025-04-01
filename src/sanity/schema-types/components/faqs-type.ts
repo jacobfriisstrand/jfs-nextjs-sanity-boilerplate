@@ -16,4 +16,15 @@ export const faqsType = defineType({
       of: [{ type: "reference", to: [{ type: "faq" }] }],
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare({ title }) {
+      return {
+        title,
+        subtitle: "FAQs",
+      };
+    },
+  },
 });
