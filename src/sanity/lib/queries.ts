@@ -7,9 +7,6 @@ export const IMAGE_QUERY = defineQuery(`{
     _id,
     _type,
     url,
-    metadata {
-      lqip
-    },
     dimensions {
       _type,
       aspectRatio,
@@ -19,50 +16,30 @@ export const IMAGE_QUERY = defineQuery(`{
   }
 }`);
 
-export const POSTS_QUERY
-  = defineQuery(`*[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{
-  _id,
-  title,
-  slug,
-  body,
-  mainImage ${IMAGE_QUERY},
-  publishedAt,
-  "categories": coalesce(
-    categories[]->{
-      _id,
-      slug,
-      title
-    },
-    []
-  ),
-  author->{
-    name,
-    image
+const CONTENT_QUERY = `content[]{
+  ...,
+  _type == "faqs" => {
+    ...,
+    faqs[]->
+  },
+  _type == "hero" => {
+    ...,
+    image ${IMAGE_QUERY}
+  },
+  _type == "textAndImage" => {
+    ...,
+    image ${IMAGE_QUERY}
   }
+}`;
+
+export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
+  ...,
+  ${CONTENT_QUERY}
 }`);
 
-export const POSTS_SLUGS_QUERY
-  = defineQuery(`*[_type == "post" && defined(slug.current)]{ 
-  "slug": slug.current
-}`);
-
-export const POST_QUERY
-  = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
-  _id,
-  title,
-  body,
-  mainImage ${IMAGE_QUERY},
-  publishedAt,
-  "categories": coalesce(
-    categories[]->{
-      _id,
-      slug,
-      title
-    },
-    []
-  ),
-  author->{
-    name,
-    image
-  }
-}`);
+export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
+    homePage->{
+      ...,
+      ${CONTENT_QUERY}
+    }
+  }`);

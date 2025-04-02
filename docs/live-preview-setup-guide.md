@@ -15,7 +15,7 @@
 Add the following to your `.env` file:
 
 ```env
-SANITY_API_READ_TOKEN="your-new-token"
+NEXT_PUBLIC_SANITY_API_READ_TOKEN="your-new-token"
 ```
 
 ⚠️ **Important Security Notes:**

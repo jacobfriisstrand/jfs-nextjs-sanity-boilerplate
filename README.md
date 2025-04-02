@@ -16,7 +16,7 @@ This project follows an opinionated workflow to maintain code quality and consis
 
 ### Git Workflow
 
-- Pre-commit hooks run linting and type generation
+- Pre-commit hooks with Husky for linting
 - Pull requests are automatically linted via GitHub Actions
 
 ### Development Practices
@@ -24,7 +24,6 @@ This project follows an opinionated workflow to maintain code quality and consis
 - Uses Turbopack for faster development builds
 - Automatic TypeScript type generation for Sanity schemas
 - Live preview support for Sanity content
-- Strict environment variable validation
 
 ## Environment Variables
 

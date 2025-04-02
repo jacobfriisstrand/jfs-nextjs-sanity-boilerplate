@@ -1,4 +1,5 @@
 import antfu from "@antfu/eslint-config";
+import nextPlugin from "@next/eslint-plugin-next";
 
 export default antfu(
   {
@@ -13,6 +14,9 @@ export default antfu(
       quotes: "double",
     },
     ignores: ["src/sanity/types.ts"],
+    plugins: {
+      "@next/next": nextPlugin,
+    },
   },
   {
     rules: {
@@ -36,6 +40,9 @@ export default antfu(
       ],
       "yaml/no-multiple-empty-lines": ["error", { max: 1 }],
       "yaml/quotes": ["error", { prefer: "double" }],
+      "@next/next/no-html-link-for-pages": "off",
+      "@next/next/no-img-element": "error",
+      "@next/next/no-script-component-in-head": "error",
     },
   },
 );

@@ -5,11 +5,22 @@ export const structure: StructureResolver = S =>
   S.list()
     .title("Blog")
     .items([
-      S.documentTypeListItem("post").title("Posts"),
-      S.documentTypeListItem("category").title("Categories"),
-      S.documentTypeListItem("author").title("Authors"),
+      S.documentTypeListItem("page").title("Pages"),
+      S.documentTypeListItem("faq").title("FAQs"),
       S.divider(),
+      S.listItem()
+        .id("globalSettings")
+        .schemaType("globalSettings")
+        .title("Global Settings")
+        .child(
+          S.editor()
+            .id("globalSettings")
+            .schemaType("globalSettings")
+            .documentId("globalSettings"),
+        ),
       ...S.documentTypeListItems().filter(
-        item => item.getId() && !["post", "category", "author"].includes(item.getId()!),
+        item =>
+          item.getId()
+          && !["page", "faq", "globalSettings"].includes(item.getId()!),
       ),
     ]);

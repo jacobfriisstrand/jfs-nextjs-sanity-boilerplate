@@ -19,16 +19,6 @@ This guide provides step-by-step instructions for deploying your Sanity.io and N
 
 ### 2. Configure Environment Variables
 
-1. Copy all environment variables from your local `.env.local` file
-2. Add them to your Vercel project settings
-3. Ensure all Sanity-related variables are properly set:
-   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
-   - `NEXT_PUBLIC_SANITY_DATASET`
-
-#### Setting Up Environment Variables for Different Environments
-
-After your initial deployment:
-
 1. Go to your Vercel project dashboard
 2. Click on "Settings" in the top navigation
 3. Select "Environment Variables" from the left sidebar
@@ -44,12 +34,24 @@ After your initial deployment:
    - Enter `development` as the value
    - Under "Environment", select "Preview"
    - Click "Save"
+6. For `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - Click "Add New" again
+   - Enter `NEXT_PUBLIC_SANITY_PROJECT_ID` as the name
+   - Enter your project ID as the value
+   - Under "Environment", select all environments
+   - Click "Save"
+7. For `NEXT_PUBLIC_SANITY_API_READ_TOKEN`
+   - Click "Add New" again
+   - Enter `NEXT_PUBLIC_SANITY_API_READ_TOKEN` as the name
+   - Enter your project ID as the value
+   - Under "Environment", select all environments
+   - Click "Save"
 
 This setup ensures:
 
 - Production deployments use the "production" dataset
 - Preview deployments (from pull requests) use the "development" dataset
-- Local development uses the "development" dataset (from your `.env.local`)
+- Local development uses the "development" dataset (from your `.env`)
 
 ### 3. Deploy Your Application
 
@@ -64,7 +66,7 @@ This setup ensures:
 
 #### Sanity Studio Access
 
-- Visit `/studio` on your deployed site
+- Visit `/admin` on your deployed site
 - Add the deployment URL as a CORS origin when prompted
 - This is required for client-side interactions with Sanity
 
@@ -93,7 +95,7 @@ npx sanity@latest dataset import production.tar.gz development
 4. Update your local `.env` file to use the development dataset:
 
 ```
-NEXT_PUBLIC_SANITY_DATASET="development"
+SANITY_DATASET="development"
 ```
 
 ## Best Practices
