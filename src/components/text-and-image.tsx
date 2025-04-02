@@ -12,13 +12,13 @@ type TextAndImageProps = Extract<
 export function TextAndImage({ title, image, orientation }: TextAndImageProps) {
   return (
     <section
-      className="container mx-auto flex gap-8 py-16 data-[orientation='imageRight']:flex-row-reverse"
+      className="container mx-auto flex gap-8 py-16"
       data-orientation={stegaClean(orientation) || "imageLeft"}
     >
       {image
         ? (
             <SanityImage
-              className="rounded-xl w-2/3 h-auto"
+              className="w-2/3"
               image={image}
               aspectRatio={16 / 9}
             />
@@ -27,7 +27,7 @@ export function TextAndImage({ title, image, orientation }: TextAndImageProps) {
       <div className="w-1/3 flex items-center">
         {title
           ? (
-              <h2 className="text-3xl mx-auto md:text-5xl lg:text-8xl font-light text-pink-500 text-pretty max-w-3xl">
+              <h2 className="text-4xl font-light text-center">
                 {title}
               </h2>
             )

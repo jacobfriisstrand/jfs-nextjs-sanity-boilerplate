@@ -16,35 +16,30 @@ export const IMAGE_QUERY = defineQuery(`{
   }
 }`);
 
-export const PAGE_QUERY
-  = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
+const CONTENT_QUERY = `content[]{
   ...,
-  content[]{
+  _type == "faqs" => {
     ...,
-    _type == "faqs" => {
-      ...,
-      faqs[]->
-    },
-    _type == "hero" => {
-      ...,
-      image ${IMAGE_QUERY}
-    },
-    _type == "textAndImage" => {
-      ...,
-      image ${IMAGE_QUERY}
-    }
+    faqs[]->
+  },
+  _type == "hero" => {
+    ...,
+    image ${IMAGE_QUERY}
+  },
+  _type == "textAndImage" => {
+    ...,
+    image ${IMAGE_QUERY}
   }
+}`;
+
+export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
+  ...,
+  ${CONTENT_QUERY}
 }`);
 
 export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
     homePage->{
       ...,
-      content[]{
-        ...,
-        _type == "faqs" => {
-          ...,
-          faqs[]->
-        }
-      }      
+      ${CONTENT_QUERY}
     }
   }`);

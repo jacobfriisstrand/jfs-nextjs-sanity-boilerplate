@@ -345,7 +345,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Query: {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}
 export type IMAGE_QUERYResult = never;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    },    _type == "hero" => {      ...,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}    },    _type == "textAndImage" => {      ...,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}    }  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{  ...,  _type == "faqs" => {    ...,    faqs[]->  },  _type == "hero" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  },  _type == "textAndImage" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  }}}
 export type PAGE_QUERYResult = {
   _id: string;
   _type: "page";
@@ -485,7 +485,7 @@ export type PAGE_QUERYResult = {
   };
 } | null;
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "siteSettings"][0]{    homePage->{      ...,      content[]{        ...,        _type == "faqs" => {          ...,          faqs[]->        }      }          }  }
+// Query: *[_id == "globalSettings"][0]{    homePage->{      ...,      content[]{  ...,  _type == "faqs" => {    ...,    faqs[]->  },  _type == "hero" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  },  _type == "textAndImage" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  }}    }  }
 export type HOME_PAGE_QUERYResult = {
   homePage: null;
 } | {
@@ -585,35 +585,35 @@ export type HOME_PAGE_QUERYResult = {
         _type: "image";
         _key: string;
       }>;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+      image: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          url: string | null;
+          dimensions: null;
+        } | null;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        alt?: string;
+        alt: string | null;
         _type: "image";
-      };
+      } | null;
     } | {
       _key: string;
       _type: "textAndImage";
       orientation?: "imageLeft" | "imageRight";
       title?: string;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+      image: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          url: string | null;
+          dimensions: null;
+        } | null;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        alt?: string;
+        alt: string | null;
         _type: "image";
-      };
+      } | null;
     }> | null;
     mainImage?: {
       asset?: {
@@ -634,7 +634,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "{\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}": IMAGE_QUERYResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    },\n    _type == \"hero\" => {\n      ...,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n    },\n    _type == \"textAndImage\" => {\n      ...,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n    }\n  }\n}": PAGE_QUERYResult;
-    "*[_id == \"siteSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n        ...,\n        _type == \"faqs\" => {\n          ...,\n          faqs[]->\n        }\n      }      \n    }\n  }": HOME_PAGE_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n}": PAGE_QUERYResult;
+    "*[_id == \"globalSettings\"][0]{\n    homePage->{\n      ...,\n      content[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n    }\n  }": HOME_PAGE_QUERYResult;
   }
 }
