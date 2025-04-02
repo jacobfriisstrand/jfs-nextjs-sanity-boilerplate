@@ -11,9 +11,6 @@ type SanityImage = {
     _id: string;
     _type: "sanity.imageAsset";
     url: string | null;
-    metadata: {
-      lqip: string | null;
-    } | null;
     dimensions: {
       _type: "sanity.imageDimensions";
       aspectRatio: number;

@@ -1431,7 +1431,7 @@
     }
   },
   {
-    "name": "blockContent",
+    "name": "richText",
     "type": "type",
     "value": {
       "type": "array",

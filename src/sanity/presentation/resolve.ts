@@ -13,27 +13,6 @@ export const resolve: PresentationPluginOptions["resolve"] = {
     // Configure locations for different document types
     // Each document type needs its own location configuration to enable live preview
 
-    // Post document type configuration
-    post: defineLocations({
-      // Select the fields needed to generate the preview URL
-      select: {
-        title: "title",
-        slug: "slug.current",
-      },
-      // Resolve function generates the preview locations for posts
-      resolve: doc => ({
-        locations: [
-          // Individual post preview location
-          {
-            title: doc?.title || "Untitled",
-            href: `/posts/${doc?.slug}`,
-          },
-          // Posts index page location
-          { title: "Posts index", href: `/posts` },
-        ],
-      }),
-    }),
-
     // Page document type configuration
     page: defineLocations({
       // Select the fields needed to generate the preview URL

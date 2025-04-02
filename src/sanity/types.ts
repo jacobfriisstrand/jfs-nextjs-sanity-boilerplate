@@ -235,7 +235,7 @@ export type Slug = {
   source?: string;
 };
 
-export type BlockContent = Array<{
+export type RichText = Array<{
   children?: Array<{
     marks?: Array<string>;
     text?: string;
@@ -324,27 +324,22 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faqs | Features | TextAndImage | Hero | PageBuilder | Faq | Page | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faqs | Features | TextAndImage | Hero | PageBuilder | Faq | Page | Slug | RichText | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: IMAGE_QUERY
-// Query: {  ...,  alt,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }}
+// Query: {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}
 export type IMAGE_QUERYResult = never;
-// Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{  _id,  title,  slug,  body,  mainImage {  ...,  alt,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }},  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
-export type POSTS_QUERYResult = Array<never>;
-// Variable: POSTS_SLUGS_QUERY
-// Query: *[_type == "post" && defined(slug.current)]{   "slug": slug.current}
-export type POSTS_SLUGS_QUERYResult = Array<never>;
-// Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  body,  mainImage {  ...,  alt,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }},  publishedAt,  "categories": coalesce(    categories[]->{      _id,      slug,      title    },    []  ),  author->{    name,    image  }}
-export type POST_QUERYResult = null;
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  _id,  title,  slug,  content[]{    ...,    _type == "hero" => {      _type,      title,      text,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }}    },    _type == "textAndImage" => {      _type,      title,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    metadata {      lqip    },    dimensions {      _type,      aspectRatio,      height,      width    }  }},      orientation    },    _type == "faqs" => {      ...,      faqs[]->    }  }}
+// Query: *[_type == "page" && slug.current == $slug][0]{  ...,  content[]{    ...,    _type == "faqs" => {      ...,      faqs[]->    },    _type == "hero" => {      ...,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}    },    _type == "textAndImage" => {      ...,      image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}    }  }}
 export type PAGE_QUERYResult = {
   _id: string;
-  title: string | null;
-  slug: Slug | null;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
   content: Array<{
     _key: string;
     _type: "faqs";
@@ -401,8 +396,8 @@ export type PAGE_QUERYResult = {
   } | {
     _key: string;
     _type: "hero";
-    title: string | null;
-    text: Array<{
+    title?: string;
+    text?: Array<{
       children?: Array<{
         marks?: Array<string>;
         text?: string;
@@ -432,15 +427,12 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
-    }> | null;
+    }>;
     image: {
       asset: {
         _id: string;
         _type: "sanity.imageAsset";
         url: string | null;
-        metadata: {
-          lqip: string | null;
-        } | null;
         dimensions: null;
       } | null;
       hotspot?: SanityImageHotspot;
@@ -451,16 +443,13 @@ export type PAGE_QUERYResult = {
   } | {
     _key: string;
     _type: "textAndImage";
-    orientation: "imageLeft" | "imageRight" | null;
-    title: string | null;
+    orientation?: "imageLeft" | "imageRight";
+    title?: string;
     image: {
       asset: {
         _id: string;
         _type: "sanity.imageAsset";
         url: string | null;
-        metadata: {
-          lqip: string | null;
-        } | null;
         dimensions: null;
       } | null;
       hotspot?: SanityImageHotspot;
@@ -469,16 +458,24 @@ export type PAGE_QUERYResult = {
       _type: "image";
     } | null;
   }> | null;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 } | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "{\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}": IMAGE_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current)]|order(publishedAt desc)[0...12]{\n  _id,\n  title,\n  slug,\n  body,\n  mainImage {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n},\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current)]{ \n  \"slug\": slug.current\n}": POSTS_SLUGS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n  title,\n  body,\n  mainImage {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n},\n  publishedAt,\n  \"categories\": coalesce(\n    categories[]->{\n      _id,\n      slug,\n      title\n    },\n    []\n  ),\n  author->{\n    name,\n    image\n  }\n}": POST_QUERYResult;
-    "*[_type == \"page\" && slug.current == $slug][0]{\n  _id,\n  title,\n  slug,\n  content[]{\n    ...,\n    _type == \"hero\" => {\n      _type,\n      title,\n      text,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n    },\n    _type == \"textAndImage\" => {\n      _type,\n      title,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    metadata {\n      lqip\n    },\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n},\n      orientation\n    },\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    }\n  }\n}": PAGE_QUERYResult;
+    "{\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}": IMAGE_QUERYResult;
+    "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  content[]{\n    ...,\n    _type == \"faqs\" => {\n      ...,\n      faqs[]->\n    },\n    _type == \"hero\" => {\n      ...,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n    },\n    _type == \"textAndImage\" => {\n      ...,\n      image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n    }\n  }\n}": PAGE_QUERYResult;
   }
 }
