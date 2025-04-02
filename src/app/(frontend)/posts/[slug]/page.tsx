@@ -2,10 +2,10 @@ import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { SanityImage } from "@/components/ui/sanity-image";
+import { SanityImage } from "@/components/sanity-image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
-import { components } from "@/sanity/portable-text-components";
+import { components } from "@/sanity/rich-text-components";
 
 export default async function Page({
   params,

@@ -1,23 +1,17 @@
 import type { SchemaTypeDefinition } from "sanity";
 
-import { authorType } from "./author-type";
-import { blockContentType } from "./block-content-type";
-import { categoryType } from "./category-type";
-import { faqsType } from "./components/faqs-type";
-import { featuresType } from "./components/features-type";
-import { heroType } from "./components/hero-type";
-import { textAndImageType } from "./components/text-and-image-type";
+import { faqsType } from "./component-schema-types/faqs-type";
+import { featuresType } from "./component-schema-types/features-type";
+import { heroType } from "./component-schema-types/hero-type";
+import { textAndImageType } from "./component-schema-types/text-and-image-type";
 import { faqType } from "./faq-type";
 import { pageBuilderType } from "./page-builder-type";
 import { pageType } from "./page-type";
-import { postType } from "./post-type";
+import { richTextType } from "./rich-text-type";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
-    blockContentType,
-    categoryType,
-    postType,
-    authorType,
+    richTextType,
     pageType,
     faqType,
     pageBuilderType,

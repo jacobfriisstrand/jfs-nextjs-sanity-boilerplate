@@ -48,7 +48,7 @@ type SanityImageProps = Omit<ImageProps, "src" | "alt"> & {
 
 export function SanityImage({
   image,
-  quality = 80,
+  quality = 90,
   aspectRatio,
   className,
   ...props
@@ -73,7 +73,7 @@ export function SanityImage({
 
   return (
     <Image
-      className={cn(`aspect-[${width}/${height}] object-cover`, className)}
+      className={cn(`aspect-[${width}/${height}] object-cover size-full`, className)}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       src={urlFor(image)
         .width(width)

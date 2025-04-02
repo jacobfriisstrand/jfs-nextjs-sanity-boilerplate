@@ -1,4 +1,3 @@
-import { ImageIcon } from "@sanity/icons";
 import { defineArrayMember, defineType } from "sanity";
 
 /**
@@ -12,9 +11,9 @@ import { defineArrayMember, defineType } from "sanity";
  *  }
  */
 
-export const blockContentType = defineType({
-  title: "Block Content",
-  name: "blockContent",
+export const richTextType = defineType({
+  title: "Rich Text",
+  name: "richText",
   type: "array",
   of: [
     defineArrayMember({
@@ -61,7 +60,6 @@ export const blockContentType = defineType({
     // as a block type.
     defineArrayMember({
       type: "image",
-      icon: ImageIcon,
       options: { hotspot: true },
       fields: [
         {
@@ -85,6 +83,20 @@ export const blockContentType = defineType({
           }),
         },
       ],
+      preview: {
+        select: {
+          title: "title",
+          media: "image",
+        },
+        prepare({ title, media }) {
+          return {
+            title,
+            subtitle: "Hero",
+            media,
+          };
+        },
+      },
     }),
   ],
+
 });

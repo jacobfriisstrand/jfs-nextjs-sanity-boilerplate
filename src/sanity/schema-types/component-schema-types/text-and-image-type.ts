@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 
+import { imageFieldType } from "@/sanity/schema-types/utility-schema-types/image-field-type";
+
 export const textAndImageType = defineType({
   name: "textAndImage",
   type: "object",
@@ -18,10 +20,7 @@ export const textAndImageType = defineType({
       name: "title",
       type: "string",
     }),
-    defineField({
-      name: "image",
-      type: "image",
-    }),
+    imageFieldType("image"),
   ],
   preview: {
     select: {
@@ -31,7 +30,7 @@ export const textAndImageType = defineType({
     prepare({ title, media }) {
       return {
         title,
-        subtitle: "Split Image",
+        subtitle: "Text and Image",
         media,
       };
     },
