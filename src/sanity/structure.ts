@@ -8,9 +8,19 @@ export const structure: StructureResolver = S =>
       S.documentTypeListItem("page").title("Pages"),
       S.documentTypeListItem("faq").title("FAQs"),
       S.divider(),
+      S.listItem()
+        .id("globalSettings")
+        .schemaType("globalSettings")
+        .title("Global Settings")
+        .child(
+          S.editor()
+            .id("globalSettings")
+            .schemaType("globalSettings")
+            .documentId("globalSettings"),
+        ),
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["page", "faq"].includes(item.getId()!),
+          && !["page", "faq", "globalSettings"].includes(item.getId()!),
       ),
     ]);

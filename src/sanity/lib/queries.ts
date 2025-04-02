@@ -35,3 +35,16 @@ export const PAGE_QUERY
     }
   }
 }`);
+
+export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
+    homePage->{
+      ...,
+      content[]{
+        ...,
+        _type == "faqs" => {
+          ...,
+          faqs[]->
+        }
+      }      
+    }
+  }`);
