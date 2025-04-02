@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-import { imageFieldType } from "@/sanity/schema-types/utility-schema-types/image-field-type";
+import { imageFieldType } from "@/sanity/schema-types/image-field-type";
 
 export const textAndImageType = defineType({
   name: "textAndImage",

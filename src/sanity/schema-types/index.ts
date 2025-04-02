@@ -1,13 +1,13 @@
 import type { SchemaTypeDefinition } from "sanity";
 
-import { faqsType } from "./component-schema-types/faqs-type";
-import { featuresType } from "./component-schema-types/features-type";
-import { heroType } from "./component-schema-types/hero-type";
-import { textAndImageType } from "./component-schema-types/text-and-image-type";
 import { faqType } from "./faq-type";
+import { faqsType } from "./faqs-type";
+import { featuresType } from "./features-type";
+import { heroType } from "./hero-type";
 import { pageBuilderType } from "./page-builder-type";
 import { pageType } from "./page-type";
 import { richTextType } from "./rich-text-type";
+import { textAndImageType } from "./text-and-image-type";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
