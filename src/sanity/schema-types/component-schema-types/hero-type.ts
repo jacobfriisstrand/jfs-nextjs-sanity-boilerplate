@@ -12,7 +12,7 @@ export const heroType = defineType({
     }),
     defineField({
       name: "text",
-      type: "blockContent",
+      type: "richText",
     }),
     imageFieldType("image"),
   ],
