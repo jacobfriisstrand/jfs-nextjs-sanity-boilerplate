@@ -37,8 +37,8 @@ This project follows an opinionated workflow to maintain code quality and consis
 2. Fill in the required environment variables in your `.env` file:
 
    ```
-   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
-   NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
+   SANITY_PROJECT_ID=your_sanity_project_id
+   SANITY_DATASET=your_sanity_dataset
    ```
 
    You can find these values in your Sanity project settings.

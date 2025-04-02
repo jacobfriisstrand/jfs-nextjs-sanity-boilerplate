@@ -22,8 +22,8 @@ This guide provides step-by-step instructions for deploying your Sanity.io and N
 1. Copy all environment variables from your local `.env.local` file
 2. Add them to your Vercel project settings
 3. Ensure all Sanity-related variables are properly set:
-   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
-   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `SANITY_PROJECT_ID`
+   - `SANITY_DATASET`
 
 #### Setting Up Environment Variables for Different Environments
 
@@ -32,15 +32,15 @@ After your initial deployment:
 1. Go to your Vercel project dashboard
 2. Click on "Settings" in the top navigation
 3. Select "Environment Variables" from the left sidebar
-4. For `NEXT_PUBLIC_SANITY_DATASET`:
+4. For `SANITY_DATASET`:
    - Click "Add New"
-   - Enter `NEXT_PUBLIC_SANITY_DATASET` as the name
+   - Enter `SANITY_DATASET` as the name
    - Enter `production` as the value
    - Under "Environment", select "Production"
    - Click "Save"
 5. Add the development environment variable:
    - Click "Add New" again
-   - Enter `NEXT_PUBLIC_SANITY_DATASET` as the name
+   - Enter `SANITY_DATASET` as the name
    - Enter `development` as the value
    - Under "Environment", select "Preview"
    - Click "Save"
@@ -93,7 +93,7 @@ npx sanity@latest dataset import production.tar.gz development
 4. Update your local `.env` file to use the development dataset:
 
 ```
-NEXT_PUBLIC_SANITY_DATASET="development"
+SANITY_DATASET="development"
 ```
 
 ## Best Practices

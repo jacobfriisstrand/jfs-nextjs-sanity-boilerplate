@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 import { client } from "../lib/client";
 
-export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-03-26";
+export const apiVersion = process.env.SANITY_API_VERSION || "2025-03-26";
 
 export const studioClient = client.withConfig({ apiVersion });
 
