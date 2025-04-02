@@ -16,7 +16,7 @@ This project follows an opinionated workflow to maintain code quality and consis
 
 ### Git Workflow
 
-- Pre-commit hooks run linting and type generation
+- Pre-commit hooks with Husky for linting
 - Pull requests are automatically linted via GitHub Actions
 
 ### Development Practices
@@ -24,7 +24,6 @@ This project follows an opinionated workflow to maintain code quality and consis
 - Uses Turbopack for faster development builds
 - Automatic TypeScript type generation for Sanity schemas
 - Live preview support for Sanity content
-- Strict environment variable validation
 
 ## Environment Variables
 
@@ -37,8 +36,8 @@ This project follows an opinionated workflow to maintain code quality and consis
 2. Fill in the required environment variables in your `.env` file:
 
    ```
-   SANITY_PROJECT_ID=your_sanity_project_id
-   SANITY_DATASET=your_sanity_dataset
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+   NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
    ```
 
    You can find these values in your Sanity project settings.
