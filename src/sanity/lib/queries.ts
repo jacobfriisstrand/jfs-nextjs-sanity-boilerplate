@@ -34,12 +34,18 @@ const CONTENT_QUERY = `content[]{
 
 export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
   ...,
+    "seo": {
+    "title": coalesce(seo.title, title, ""),
+  },
   ${CONTENT_QUERY}
 }`);
 
 export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
     homePage->{
       ...,
+        "seo": {
+    "title": coalesce(seo.title, title, ""),
+  },
       ${CONTENT_QUERY}
     }
   }`);

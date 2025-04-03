@@ -8,6 +8,7 @@ import { heroType } from "./hero-type";
 import { pageBuilderType } from "./page-builder-type";
 import { pageType } from "./page-type";
 import { richTextType } from "./rich-text-type";
+import { seoType } from "./seo-type";
 import { textAndImageType } from "./text-and-image-type";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -21,5 +22,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     featuresType,
     faqsType,
     globalSettingsType,
+    seoType,
   ],
 };
