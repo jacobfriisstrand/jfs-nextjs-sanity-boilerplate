@@ -7,8 +7,25 @@ export const seoType = defineType({
   fields: [
     defineField({
       name: "title",
-      description: "If provided, this will override the title field",
+      description: "If provided, this will override the page title field",
       type: "string",
     }),
+    defineField({
+      name: "description",
+      type: "text",
+      description: "A concise summary of your page (150-160 characters recommended). This appears in search results and when your page is shared on social media. Make it unique, descriptive, and include relevant details like author, date, or key information.",
+    }),
+    defineField({
+      name: "image",
+      type: "image",
+      options: { hotspot: true },
+      description: "This image will be used for the SEO image, eg. when the page is shared on social media",
+    }),
+    defineField({
+      name: "noIndex",
+      type: "boolean",
+      description: "If enabled, the page will not be indexed by search engines",
+    }),
+
   ],
 });
