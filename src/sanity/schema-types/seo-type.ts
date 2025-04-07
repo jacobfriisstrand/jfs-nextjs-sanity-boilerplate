@@ -17,8 +17,7 @@ export const seoType = defineType({
     }),
     defineField({
       name: "image",
-      type: "image",
-      options: { hotspot: true },
+      type: "imageFieldType",
       description: "This image will be used for the SEO image, eg. when the page is shared on social media",
     }),
     defineField({
