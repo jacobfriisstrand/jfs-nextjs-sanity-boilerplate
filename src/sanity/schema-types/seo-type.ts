@@ -4,6 +4,9 @@ export const seoType = defineType({
   name: "seo",
   title: "SEO",
   type: "object",
+  fieldsets: [
+    { name: "seo", title: "SEO" },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -17,7 +20,7 @@ export const seoType = defineType({
     }),
     defineField({
       name: "image",
-      type: "imageFieldType",
+      type: "image",
       description: "This image will be used for the SEO image, eg. when the page is shared on social media",
     }),
     defineField({

@@ -39,22 +39,6 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
 export type SanityFileAsset = {
   _id: string;
   _type: "sanity.fileAsset";
@@ -77,40 +61,6 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -118,18 +68,23 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type TextAndImage = {
   _type: "textAndImage";
   orientation?: "imageLeft" | "imageRight";
   title?: string;
-  image?: ImageFieldType;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "imageFieldType";
+  };
 };
 
 export type RichText = Array<{
@@ -150,8 +105,19 @@ export type RichText = Array<{
   _type: "block";
   _key: string;
 } | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  caption?: string;
+  _type: "imageFieldType";
   _key: string;
-} & ImageFieldType>;
+}>;
 
 export type Redirect = {
   _id: string;
@@ -179,11 +145,31 @@ export type Hero = {
   _type: "hero";
   title?: string;
   text?: RichText;
-  image?: ImageFieldType;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "imageFieldType";
+  };
 };
 
 export type ImageFieldType = {
   _type: "imageFieldType";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
   alt?: string;
   caption?: string;
 };
@@ -220,11 +206,78 @@ export type Slug = {
   source?: string;
 };
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
 export type Seo = {
   _type: "seo";
   title?: string;
   description?: string;
-  image?: ImageFieldType;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   noIndex?: boolean;
 };
 
@@ -261,7 +314,7 @@ export type Faq = {
   body?: RichText;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | TextAndImage | RichText | Redirect | PageBuilder | Hero | ImageFieldType | GlobalSettings | Page | Slug | Seo | Features | Faqs | Faq;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | TextAndImage | RichText | Redirect | PageBuilder | Hero | ImageFieldType | GlobalSettings | Page | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Features | Faqs | Faq;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PAGE_QUERY
@@ -275,7 +328,17 @@ export type PAGE_QUERYResult = {
   seo: {
     title: string | "";
     description: string | "";
-    image: ImageFieldType | null;
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
     noIndex: boolean | false;
   };
   title?: string;
@@ -309,10 +372,17 @@ export type PAGE_QUERYResult = {
     title?: string;
     text?: RichText;
     image: {
-      _type: "imageFieldType";
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
       alt: string | null;
       caption?: string;
-      asset: null;
+      _type: "imageFieldType";
     } | null;
   } | {
     _key: string;
@@ -320,10 +390,17 @@ export type PAGE_QUERYResult = {
     orientation?: "imageLeft" | "imageRight";
     title?: string;
     image: {
-      _type: "imageFieldType";
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
       alt: string | null;
       caption?: string;
-      asset: null;
+      _type: "imageFieldType";
     } | null;
   }> | null;
 } | null;
@@ -341,7 +418,17 @@ export type HOME_PAGE_QUERYResult = {
     seo: {
       title: string | "";
       description: string | "";
-      image: ImageFieldType | null;
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
       noIndex: boolean | false;
     };
     title?: string;
@@ -375,10 +462,17 @@ export type HOME_PAGE_QUERYResult = {
       title?: string;
       text?: RichText;
       image: {
-        _type: "imageFieldType";
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          url: string | null;
+          dimensions: null;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
         alt: string | null;
         caption?: string;
-        asset: null;
+        _type: "imageFieldType";
       } | null;
     } | {
       _key: string;
@@ -386,10 +480,17 @@ export type HOME_PAGE_QUERYResult = {
       orientation?: "imageLeft" | "imageRight";
       title?: string;
       image: {
-        _type: "imageFieldType";
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          url: string | null;
+          dimensions: null;
+        } | null;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
         alt: string | null;
         caption?: string;
-        asset: null;
+        _type: "imageFieldType";
       } | null;
     }> | null;
   } | null;
@@ -401,6 +502,30 @@ export type REDIRECTS_QUERYResult = Array<{
   destination: string | null;
   permanent: boolean | null;
 }>;
+// Variable: OG_IMAGE_QUERY
+// Query: *[_id == $id][0]{    title,    "image": seo.image {      ...,      asset-> {        _id,        _type,        url,        metadata {          palette        }      }    }  }
+export type OG_IMAGE_QUERYResult = {
+  title: null;
+  image: null;
+} | {
+  title: string | null;
+  image: null;
+} | {
+  title: string | null;
+  image: {
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      url: string | null;
+      metadata: {
+        palette: SanityImagePalette | null;
+      } | null;
+    } | null;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -409,5 +534,6 @@ declare module "@sanity/client" {
     "*[_type == \"page\" && slug.current == $slug][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  content[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n}": PAGE_QUERYResult;
     "*[_id == \"globalSettings\"][0]{\n    homePage->{\n      ...,\n      \n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n      content[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n    }\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
+    "\n  *[_id == $id][0]{\n    title,\n    \"image\": seo.image {\n      ...,\n      asset-> {\n        _id,\n        _type,\n        url,\n        metadata {\n          palette\n        }\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;
   }
 }

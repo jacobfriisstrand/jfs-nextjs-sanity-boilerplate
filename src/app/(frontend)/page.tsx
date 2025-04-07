@@ -30,6 +30,16 @@ export async function generateMetadata({
     description: page?.homePage?.seo.description,
   };
 
+  metadata.openGraph = {
+    images: {
+      url: page.homePage?.seo.image
+        ? urlFor(page.homePage?.seo.image).width(1200).height(630).url()
+        : `/api/og?id=${page.homePage?._id}`,
+      width: 1200,
+      height: 630,
+    },
+  };
+
   if (page?.homePage?.seo.image) {
     metadata.openGraph = {
       images: {

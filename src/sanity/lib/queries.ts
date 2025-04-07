@@ -62,3 +62,20 @@ export const REDIRECTS_QUERY = defineQuery(`
       permanent
   }
 `);
+
+export const OG_IMAGE_QUERY = defineQuery(`
+  *[_id == $id][0]{
+    title,
+    "image": seo.image {
+      ...,
+      asset-> {
+        _id,
+        _type,
+        url,
+        metadata {
+          palette
+        }
+      }
+    }
+  }    
+`);
