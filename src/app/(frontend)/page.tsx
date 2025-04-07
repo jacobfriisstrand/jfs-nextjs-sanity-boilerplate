@@ -30,20 +30,10 @@ export async function generateMetadata({
     description: page?.homePage?.seo.description,
   };
 
-  metadata.openGraph = {
-    images: {
-      url: page.homePage?.seo.image
-        ? urlFor(page.homePage?.seo.image).width(1200).height(630).url()
-        : `/api/og?id=${page.homePage?._id}`,
-      width: 1200,
-      height: 630,
-    },
-  };
-
-  if (page?.homePage?.seo.image) {
+  if (page?.homePage?.seo.image && page?.homePage?.seo.image.asset?._ref) {
     metadata.openGraph = {
       images: {
-        url: urlFor(page?.homePage?.seo.image).width(1200).height(630).url(),
+        url: urlFor(page.homePage.seo.image).width(1200).height(630).url(),
         width: 1200,
         height: 630,
       },
