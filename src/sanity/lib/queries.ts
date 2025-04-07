@@ -54,3 +54,11 @@ export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
       ${CONTENT_QUERY}
     }
   }`);
+
+export const REDIRECTS_QUERY = defineQuery(`
+  *[_type == "redirect" && isEnabled == true] {
+      source,
+      destination,
+      permanent
+  }
+`);
