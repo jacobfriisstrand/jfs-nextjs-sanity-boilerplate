@@ -189,9 +189,7 @@ export type GlobalSettings = {
 };
 
 export type Page = {
-export type Page = {
   _id: string;
-  _type: "page";
   _type: "page";
   _createdAt: string;
   _updatedAt: string;
