@@ -79,3 +79,13 @@ export const OG_IMAGE_QUERY = defineQuery(`
     }
   }    
 `);
+
+export const SITEMAP_QUERY = defineQuery(`
+*[_type in ["page"] && defined(slug.current)] {
+    "href": select(
+      _type == "page" => "/" + slug.current,
+      slug.current
+    ),
+    _updatedAt
+}
+`);
