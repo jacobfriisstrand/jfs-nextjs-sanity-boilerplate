@@ -17,6 +17,7 @@ export const seoType = defineType({
       name: "description",
       type: "text",
       description: "A concise summary of your page (150-160 characters recommended). This appears in search results and when your page is shared on social media. Make it unique, descriptive, and include relevant details like author, date, or key information.",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "image",

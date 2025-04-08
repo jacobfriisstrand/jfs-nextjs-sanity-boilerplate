@@ -1,6 +1,25 @@
+import type { FAQPage, WithContext } from "schema-dts";
+
 import { PortableText } from "next-sanity";
 
 import type { PAGE_QUERYResult } from "@/sanity/types";
+
+import { JSONLD } from "./json-ld";
+
+function generateFaqData(faqs: FAQsProps["faqs"]): WithContext<FAQPage> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs?.map(faq => ({
+      "@type": "Question",
+      "name": faq.title!,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.text!,
+      },
+    })),
+  };
+}
 
 type FAQsProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
@@ -8,8 +27,11 @@ type FAQsProps = Extract<
 >;
 
 export function FAQs({ _key, title, faqs }: FAQsProps) {
+  const faqData = generateFaqData(faqs);
+
   return (
     <section className="container mx-auto flex flex-col gap-8 py-16">
+      <JSONLD data={faqData} />
       {title
         ? (
             <h2 className="text-3xl font-medium text-center">

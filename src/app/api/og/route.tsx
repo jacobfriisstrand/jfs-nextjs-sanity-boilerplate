@@ -38,8 +38,7 @@ export async function GET(request: Request) {
     notFound();
   }
 
-  console.log(data);
-
+  // TODO: Specify a brand specific fallback color
   const vibrantBackground
     = data?.image?.asset?.metadata?.palette?.vibrant?.background ?? "#3B82F6";
   const darkVibrantBackground
