@@ -1,11 +1,4 @@
-import type { Metadata } from "next";
-
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Next.js boilerplate",
-  description: "Created by Jacob Friis Strand",
-};
+import "@/app/globals.css";
 
 export default function RootLayout({
   children,
