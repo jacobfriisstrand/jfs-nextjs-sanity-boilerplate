@@ -5,7 +5,7 @@
  */
 
 import { visionTool } from "@sanity/vision";
-import { defineConfig } from "sanity";
+import { defineConfig, isDev } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
@@ -18,24 +18,35 @@ import { structure } from "./src/sanity/structure";
 
 export default defineConfig({
   basePath: "/admin",
+  // TODO: Change this to the name of the website
+  title: "Your Website Name",
   projectId,
   dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
-  plugins: [
-    structureTool({ structure }),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
-    presentationTool({
-      resolve,
-      previewUrl: {
-        previewMode: {
-          enable: "/api/draft-mode/enable",
-        },
-      },
-    }),
-  ],
+  plugins: isDev
+    ? [
+        structureTool({ structure }),
+        visionTool({ defaultApiVersion: apiVersion }),
+        presentationTool({
+          resolve,
+          previewUrl: {
+            previewMode: {
+              enable: "/api/draft-mode/enable",
+            },
+          },
+        }),
+      ]
+    : [
+        structureTool({ structure }),
+        presentationTool({
+          resolve,
+          previewUrl: {
+            previewMode: {
+              enable: "/api/draft-mode/enable",
+            },
+          },
+        }),
+      ],
   document: {
     newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
   },

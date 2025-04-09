@@ -186,6 +186,17 @@ export type GlobalSettings = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "page";
   };
+  favicon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Page = {
