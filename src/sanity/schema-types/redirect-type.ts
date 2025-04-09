@@ -29,7 +29,8 @@ function isValidUrl(value: string | undefined) {
 
 export const redirectType = defineType({
   name: "redirect",
-  title: "Redirect",
+  title: "Redirects",
+  icon: () => "🔄",
   type: "document",
   validation: Rule =>
     Rule.custom((doc: SanityDocumentLike | undefined) => {

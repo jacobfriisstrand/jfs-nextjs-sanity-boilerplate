@@ -9,6 +9,7 @@ export const studioClient = client.withConfig({ apiVersion });
 export const pageType = defineType({
   name: "page",
   title: "Page",
+  icon: () => "📄",
   type: "document",
   fields: [
     defineField({
