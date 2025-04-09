@@ -18,7 +18,7 @@ const IMAGE_QUERY = `{
 
 const SEO_QUERY = `
   "seo": {
-    "title": coalesce(seo.title, title, ""),
+    "title": seo.title,
     "description": coalesce(seo.description,  ""),
     "image": seo.image,
     "noIndex": seo.noIndex == true
