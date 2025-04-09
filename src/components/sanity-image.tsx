@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
 type SanityImage = {
-  _type: "image";
+  _type: "imageFieldType";
   asset: {
     _id: string;
     _type: "sanity.imageAsset";

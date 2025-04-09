@@ -59,30 +59,7 @@ export const richTextType = defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: "image",
-      options: { hotspot: true },
-      fields: [
-        {
-          name: "caption",
-          type: "string",
-          title: "Caption",
-          description: "The caption of the image",
-        },
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative Text",
-          description: "The alternative text for the image. Should be a short description of the image.",
-          validation: rule => rule.custom((value, context) => {
-            const parent = context?.parent as { asset?: { _ref?: string } };
-            return (
-              !value && parent?.asset?._ref
-                ? "Alternative text is required when an image is present"
-                : true
-            );
-          }),
-        },
-      ],
+      type: "imageFieldType",
       preview: {
         select: {
           title: "title",

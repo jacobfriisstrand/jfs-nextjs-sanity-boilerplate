@@ -1,7 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-import { imageFieldType } from "@/sanity/schema-types/image-field-type";
-
 export const heroType = defineType({
   name: "hero",
   type: "object",
@@ -14,7 +12,10 @@ export const heroType = defineType({
       name: "text",
       type: "richText",
     }),
-    imageFieldType("image"),
+    defineField({
+      name: "image",
+      type: "imageFieldType",
+    }),
   ],
 
   preview: {
