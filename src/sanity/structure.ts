@@ -5,12 +5,24 @@ export const structure: StructureResolver = S =>
   S.list()
     .title("Menu")
     .items([
-      S.documentTypeListItem("page").title("Pages"),
       S.documentTypeListItem("faq").title("FAQs"),
       S.divider(),
       S.listItem()
-        .id("globalSettings")
-        .schemaType("globalSettings")
+        .id("homePage")
+        .schemaType("homePage")
+        .title("Homepage")
+        .child(
+          S.editor()
+            .id("homePage")
+            .schemaType("homePage")
+            .documentId("homePage"),
+        ),
+      S.divider(),
+      S.documentTypeListItem("genericPage").title("Generic Pages"),
+      S.documentTypeListItem("coursePage").title("Courses"),
+      S.documentTypeListItem("productPage").title("Products"),
+      S.divider(),
+      S.listItem()
         .title("Global Settings")
         .child(
           S.editor()
@@ -21,6 +33,6 @@ export const structure: StructureResolver = S =>
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["page", "faq", "globalSettings"].includes(item.getId()!),
+          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage"].includes(item.getId()!),
       ),
     ]);

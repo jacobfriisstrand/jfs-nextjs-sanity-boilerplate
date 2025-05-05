@@ -5,7 +5,7 @@ import type { PAGE_QUERYResult } from "@/sanity/types";
 import { SanityImage } from "@/components/sanity-image";
 
 type TextAndImageProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["modules"]>[number],
   { _type: "textAndImage" }
 >;
 

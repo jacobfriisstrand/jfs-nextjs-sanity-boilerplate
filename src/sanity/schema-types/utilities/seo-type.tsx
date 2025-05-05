@@ -49,12 +49,12 @@ export const seoType = defineType({
       name: "image",
       title: "SEO image",
       type: "image",
-      description: "This image will be used for the SEO image, eg. when the page is shared on social media",
+      description: "This image will be used for the SEO image. This image is shown on search engine results pages, when the page is shared as a link on eg. social media.",
     }),
     defineField({
       name: "noIndex",
       type: "boolean",
-      description: "If enabled, the page will not be indexed by search engines",
+      description: "If enabled, the page will not be recognized by search engines",
     }),
 
   ],

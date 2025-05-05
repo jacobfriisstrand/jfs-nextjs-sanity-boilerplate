@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 /**
  * This is the schema type for block content used in the post document type
@@ -45,11 +45,11 @@ export const richTextType = defineType({
             name: "link",
             type: "object",
             fields: [
-              {
+              defineField({
                 title: "URL",
                 name: "href",
                 type: "url",
-              },
+              }),
             ],
           },
         ],
@@ -75,5 +75,4 @@ export const richTextType = defineType({
       },
     }),
   ],
-
 });
