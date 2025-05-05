@@ -4,15 +4,8 @@ export const globalSettingsType = defineType({
   name: "globalSettings",
   title: "Global Settings",
   type: "document",
-  icon: () => "🌐",
+  icon: () => "⚙️",
   fields: [
-    defineField({
-      name: "homePage",
-      title: "Homepage",
-      description: "Select the page that will be used as the homepage.",
-      type: "reference",
-      to: [{ type: "page" }],
-    }),
     defineField({
       name: "favicon",
       type: "image",

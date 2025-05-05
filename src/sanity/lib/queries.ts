@@ -25,7 +25,8 @@ const SEO_QUERY = `
   },
 `;
 
-const CONTENT_QUERY = `content[]{
+// TODO: FIx the pagebuilder data not rendering in the frontend
+const CONTENT_QUERY = `pageBuilder[]{
   ...,
   _type == "faqs" => {
     ...,
@@ -35,7 +36,6 @@ const CONTENT_QUERY = `content[]{
     body,
     "text": pt::text(body)
 }
-
   },
   _type == "hero" => {
     ...,
@@ -47,18 +47,21 @@ const CONTENT_QUERY = `content[]{
   }
 }`;
 
-export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
+// The $pageTypes is an array of page types that are allowed to be queried.
+// This array is defined in the constants/page-types.ts file.
+// The $slug is the slug of the page that is being queried.
+// These parameters are passed in the homepage page.tsx and the [slug]/page.tsx files.
+export const PAGE_QUERY = defineQuery(`*[_type in $pageTypes && slug.current == $slug][0]{
   ...,
   ${SEO_QUERY}
   ${CONTENT_QUERY}
 }`);
 
-export const HOME_PAGE_QUERY = defineQuery(`*[_id == "globalSettings"][0]{
-    homePage->{
-      ...,
-      ${SEO_QUERY}
-      ${CONTENT_QUERY}
-    }
+// TODO: Change the home page query, as it is not in the globalSettings anymore.
+export const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage"][0]{
+    ...,
+    ${SEO_QUERY}
+    ${CONTENT_QUERY}
   }`);
 
 export const REDIRECTS_QUERY = defineQuery(`
@@ -87,9 +90,9 @@ export const OG_IMAGE_QUERY = defineQuery(`
 `);
 
 export const SITEMAP_QUERY = defineQuery(`
-*[_type in ["page"] && defined(slug.current)] {
+*[_type in $pageTypes && defined(slug.current)] {
     "href": select(
-      _type == "page" => "/" + slug.current,
+      _type == $pageTypes[0] => "/" + slug.current,
       slug.current
     ),
     _updatedAt

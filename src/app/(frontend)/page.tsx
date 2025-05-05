@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageBuilderWrapper } from "@/components/page-builder-wrapper";
+import { PAGE_TYPES } from "@/sanity/constants/page-types";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
@@ -9,6 +10,7 @@ type RouteProps = {
   params: Promise<{ slug: string }>;
 };
 
+// TODO: Change this page to accept a query from the singleton homePage that exists only in the Sanity structure
 async function getPage(params: RouteProps["params"]) {
   return sanityFetch({
     query: HOME_PAGE_QUERY,
@@ -26,21 +28,21 @@ export async function generateMetadata({
   }
 
   const metadata: Metadata = {
-    title: page?.homePage?.seo.title,
-    description: page?.homePage?.seo.description,
+    title: page?.seo.title,
+    description: page?.seo.description,
   };
 
-  if (page?.homePage?.seo.image && page?.homePage?.seo.image.asset?._ref) {
+  if (page?.seo.image && page?.seo.image.asset?._ref) {
     metadata.openGraph = {
       images: {
-        url: urlFor(page.homePage.seo.image).width(1200).height(630).url(),
+        url: urlFor(page.seo.image).width(1200).height(630).url(),
         width: 1200,
         height: 630,
       },
     };
   }
 
-  if (page?.homePage?.seo.noIndex) {
+  if (page?.seo.noIndex) {
     metadata.robots = "noindex";
   }
 
@@ -51,10 +53,10 @@ export default async function Page({ params }: RouteProps) {
 
   return (
     <>
-      <title>{page?.homePage?.seo?.title}</title>
-      {page?.homePage?.content
+      <title>{page?.seo?.title}</title>
+      {page?.pageBuilder
         ? (
-            <PageBuilderWrapper content={page.homePage.content} documentId={page.homePage._id} documentType="page" />
+            <PageBuilderWrapper modules={page.pageBuilder} documentId={page._id} documentType={PAGE_TYPES[0]} />
           )
         : null}
     </>

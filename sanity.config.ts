@@ -34,7 +34,9 @@ export default defineConfig([
         },
       }),
     ],
-    schema,
+    schema: {
+      types: schema,
+    },
     document: {
       newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
     },
@@ -58,7 +60,9 @@ export default defineConfig([
         },
       }),
     ],
-    schema,
+    schema: {
+      types: schema,
+    },
     document: {
       newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
     },

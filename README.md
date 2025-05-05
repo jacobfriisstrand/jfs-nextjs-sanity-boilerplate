@@ -25,6 +25,30 @@ This project follows an opinionated workflow to maintain code quality and consis
 - Automatic TypeScript type generation for Sanity schemas
 - Live preview support for Sanity content
 
+### Page Builder Component Previews
+
+You can add custom image previews (screenshots) for each component in the page builder:
+
+1. Add a screenshot of the component (from Figma) to the public folder
+2. Use the following specifications:
+   - Dimensions: 600x400px (maintain consistent sizing)
+   - Format: PNG with transparent background
+   - Naming: Match schema type names (e.g., hero.png, splitImage.png)
+3. Reference the images in your page builder options:
+
+```
+options: {
+  insertMenu: {
+    views: [
+      {
+        name: "grid",
+        previewImageUrl: schemaType => `/block-previews/${schemaType}.png`,
+      },
+    ],
+  },
+}
+```
+
 ## Environment Variables
 
 1. Copy the `.env.example` file to create a new `.env` file:

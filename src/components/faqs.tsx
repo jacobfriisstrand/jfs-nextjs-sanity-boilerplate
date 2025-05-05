@@ -22,7 +22,7 @@ function generateFaqData(faqs: FAQsProps["faqs"]): WithContext<FAQPage> {
 }
 
 type FAQsProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["modules"]>[number],
   { _type: "faqs" }
 >;
 

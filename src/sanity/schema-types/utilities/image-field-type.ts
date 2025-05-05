@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const imageFieldType = defineType({
   name: "imageFieldType",
@@ -7,18 +7,18 @@ export const imageFieldType = defineType({
     hotspot: true,
   },
   fields: [
-    {
+    defineField({
       name: "alt",
       type: "string",
       title: "Alternative text",
-      description: "Alternative text is required.",
+      description: "Alternative text is used to describe the image to visually impaired users. It is also used by search engines to understand the image content.",
       validation: Rule => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: "caption",
       type: "string",
       title: "Caption",
       hidden: ({ parent }) => !parent?.asset,
-    },
+    }),
   ],
 });

@@ -1,11 +1,9 @@
-"use client";
-
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
 import { PageBuilder } from "@/components/page-builder";
 
 type PageBuilderWrapperProps = {
-  content: NonNullable<PAGE_QUERYResult>["content"];
+  modules: NonNullable<PAGE_QUERYResult>["pageBuilder"];
   documentId: string;
   documentType: string;
 };
