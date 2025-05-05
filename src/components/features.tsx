@@ -1,7 +1,7 @@
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
 type FeaturesProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["modules"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
   { _type: "features" }
 >;
 
