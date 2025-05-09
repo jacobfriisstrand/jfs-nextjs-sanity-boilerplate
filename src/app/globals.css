@@ -59,3 +59,18 @@
   --spacing-36: 2.25rem; /* 36px */
   --spacing-40: 2.5rem; /* 40px */
 }
+
+.container > * {
+  display: grid;
+  grid-template-columns: [full-start] 1fr [main] minmax(0, 1200px) 1fr [full-end];
+  column-gap: 1rem;
+  > * {
+    grid-column: main;
+  }
+  .full-bleed {
+    grid-column: full;
+    > * {
+      grid-column: main;
+    }
+  }
+}
