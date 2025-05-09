@@ -60,15 +60,14 @@ export const richTextType = defineType({
     // as a block type.
     defineArrayMember({
       type: "imageFieldType",
+      title: "Image",
       preview: {
         select: {
           title: "title",
           media: "image",
         },
-        prepare({ title, media }) {
+        prepare({ media }) {
           return {
-            title,
-            subtitle: "Hero",
             media,
           };
         },
