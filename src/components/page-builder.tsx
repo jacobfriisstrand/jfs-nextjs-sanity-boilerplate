@@ -29,6 +29,7 @@ function DragHandle({
 }) {
   return (
     <div
+      className="container"
       data-sanity={createDataAttribute({
         ...createDataAttributeConfig,
         id: documentId,

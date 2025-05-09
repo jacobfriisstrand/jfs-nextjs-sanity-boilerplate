@@ -14,11 +14,5 @@ export const imageFieldType = defineType({
       description: "Alternative text is used to describe the image to visually impaired users. It is also used by search engines to understand the image content.",
       validation: Rule => Rule.required(),
     }),
-    defineField({
-      name: "caption",
-      type: "string",
-      title: "Caption",
-      hidden: ({ parent }) => !parent?.asset,
-    }),
   ],
 });
