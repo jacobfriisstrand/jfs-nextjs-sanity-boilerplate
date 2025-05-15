@@ -6,7 +6,7 @@ export const structure: StructureResolver = S =>
     .title("Menu")
     .items([
       S.documentTypeListItem("faq").title("FAQs"),
-      S.divider(),
+      S.divider().title("Pages"),
       S.listItem()
         .id("homePage")
         .schemaType("homePage")
@@ -17,13 +17,13 @@ export const structure: StructureResolver = S =>
             .schemaType("homePage")
             .documentId("homePage"),
         ),
-      S.divider(),
       S.documentTypeListItem("genericPage").title("Generic Pages"),
       S.documentTypeListItem("coursePage").title("Courses"),
       S.documentTypeListItem("productPage").title("Products"),
-      S.divider(),
+      S.divider().title("Settings"),
       S.listItem()
         .title("Global Settings")
+        .icon(() => "🔧")
         .child(
           S.editor()
             .id("globalSettings")

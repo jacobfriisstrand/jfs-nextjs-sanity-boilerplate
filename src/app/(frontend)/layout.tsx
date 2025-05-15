@@ -2,6 +2,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 
 import { DisableDraftMode } from "@/components/disable-draft-mode";
+import Navigation from "@/components/modules/navigation/navigation";
 import { SanityLive } from "@/sanity/lib/live";
 
 export default async function RootLayout({
@@ -11,6 +12,7 @@ export default async function RootLayout({
 }>) {
   return (
     <>
+      <Navigation />
       {children}
       <SanityLive />
       {(await draftMode()).isEnabled && (
