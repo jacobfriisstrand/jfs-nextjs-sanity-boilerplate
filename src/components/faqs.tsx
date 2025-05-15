@@ -30,7 +30,7 @@ export function FAQs({ _key, title, faqs }: FAQsProps) {
   const faqData = generateFaqData(faqs);
 
   return (
-    <section className="container mx-auto flex flex-col gap-8 py-16">
+    <section className="mx-auto flex flex-col gap-8 py-16">
       <JSONLD data={faqData} />
       {title
         ? (

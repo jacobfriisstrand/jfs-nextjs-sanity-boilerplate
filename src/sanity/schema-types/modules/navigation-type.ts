@@ -3,8 +3,18 @@ import { defineField, defineType } from "sanity";
 export const navigationType = defineType({
   name: "navigation",
   type: "document",
-  title: "Navigationss",
+  title: "Navigation",
   icon: () => "🔗",
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare() {
+      return {
+        title: "Navigation",
+      };
+    },
+  },
   fields: [
     defineField({
       name: "leftMenu",
