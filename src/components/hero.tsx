@@ -11,25 +11,25 @@ type HeroProps = Extract<
 
 export function Hero({ title, text, image }: HeroProps) {
   return (
-    <section className="w-full py-16 relative">
-      <div className="relative flex flex-col items-center gap-8 z-20">
+    <section>
+      <div>
         {title
           ? (
-              <h1 className="text-4xl font-medium text-center max-w-2xl">
+              <h1>
                 {title}
               </h1>
             )
           : null}
-        <div className="text-lg max-w-2xl mx-auto">
+        <div>
           {text ? <PortableText value={text} /> : null}
         </div>
       </div>
-      <div className="absolute inset-0 bg-white opacity-75 z-10" />
+      <div />
       {image
         ? (
             <SanityImage
-              className="absolute inset-0 object-cover"
               image={image}
+              className="full-bleed"
               priority
               aspectRatio={16 / 9}
             />

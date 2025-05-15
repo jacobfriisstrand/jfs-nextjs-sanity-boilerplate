@@ -12,7 +12,7 @@ type TextAndImageProps = Extract<
 export function TextAndImage({ title, image, orientation }: TextAndImageProps) {
   return (
     <section
-      className="container mx-auto flex gap-8 py-16"
+      className="mx-auto flex gap-8 py-16"
       data-orientation={stegaClean(orientation) || "imageLeft"}
     >
       {image
