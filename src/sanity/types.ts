@@ -225,7 +225,6 @@ export type Faq = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
     _key: string;
   }>;
@@ -256,7 +255,6 @@ export type TextAndImage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
   };
 };
@@ -291,7 +289,6 @@ export type Hero = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
     _key: string;
   }>;
@@ -305,7 +302,6 @@ export type Hero = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
   };
 };
@@ -337,7 +333,6 @@ export type RichText = Array<{
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
-  caption?: string;
   _type: "imageFieldType";
   _key: string;
 }>;
@@ -353,7 +348,6 @@ export type ImageFieldType = {
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
-  caption?: string;
 };
 
 export type BasePage = {
@@ -536,7 +530,6 @@ export type PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -583,7 +576,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -597,7 +589,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -615,7 +606,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -653,7 +643,6 @@ export type PAGE_QUERYResult = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
     _key: string;
   }>;
@@ -722,7 +711,6 @@ export type PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -769,7 +757,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -783,7 +770,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -801,7 +787,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -887,7 +872,6 @@ export type PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -934,7 +918,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -948,7 +931,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -966,7 +948,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -1028,7 +1009,6 @@ export type PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -1075,7 +1055,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -1089,7 +1068,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -1107,7 +1085,6 @@ export type PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -1269,7 +1246,6 @@ export type HOME_PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -1316,7 +1292,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -1330,7 +1305,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -1348,7 +1322,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -1386,7 +1359,6 @@ export type HOME_PAGE_QUERYResult = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
-    caption?: string;
     _type: "imageFieldType";
     _key: string;
   }>;
@@ -1455,7 +1427,6 @@ export type HOME_PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -1502,7 +1473,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -1516,7 +1486,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -1534,7 +1503,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -1620,7 +1588,6 @@ export type HOME_PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -1667,7 +1634,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -1681,7 +1647,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -1699,7 +1664,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
@@ -1761,7 +1725,6 @@ export type HOME_PAGE_QUERYResult = {
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
-        caption?: string;
         _type: "imageFieldType";
         _key: string;
       }> | null;
@@ -1808,7 +1771,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
-      caption?: string;
       _type: "imageFieldType";
       _key: string;
     }>;
@@ -1822,7 +1784,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   } | {
@@ -1840,7 +1801,6 @@ export type HOME_PAGE_QUERYResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
-      caption?: string;
       _type: "imageFieldType";
     } | null;
   }> | null;
