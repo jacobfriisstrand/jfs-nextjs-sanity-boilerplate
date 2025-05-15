@@ -15,6 +15,26 @@ export const globalSettingsType = defineType({
         accept: "image/png, image/x-icon, image/svg+xml",
       },
     }),
+    defineField({
+      name: "contactInfo",
+      type: "object",
+      title: "Contact Info",
+      fields: [
+        defineField({
+          name: "phone",
+          type: "string",
+          validation: Rule => Rule.required(),
+          title: "Phone",
+        }),
+        defineField({
+          name: "email",
+          type: "string",
+          validation: Rule => Rule.required(),
+          title: "Email",
+        }),
+
+      ],
+    }),
   ],
   preview: {
     prepare() {

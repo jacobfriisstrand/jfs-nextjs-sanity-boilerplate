@@ -30,9 +30,19 @@ export const structure: StructureResolver = S =>
             .schemaType("globalSettings")
             .documentId("globalSettings"),
         ),
+      S.listItem()
+        .title("Navigation")
+        .icon(() => "🔗")
+        .child(
+          S.editor()
+            .id("navigation")
+            .schemaType("navigation")
+            .title("Navigation")
+            .documentId("navigation"),
+        ),
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage"].includes(item.getId()!),
+          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage", "navigation"].includes(item.getId()!),
       ),
     ]);
