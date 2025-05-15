@@ -5,6 +5,7 @@ import { faqType } from "@/sanity/schema-types/modules/faq-type";
 import { faqsType } from "@/sanity/schema-types/modules/faqs-type";
 import { featuresType } from "@/sanity/schema-types/modules/features-type";
 import { heroType } from "@/sanity/schema-types/modules/hero-type";
+import { navigationLinkType, navigationType } from "@/sanity/schema-types/modules/navigation-type";
 import { textAndImageType } from "@/sanity/schema-types/modules/text-and-image-type";
 import { basePageType } from "@/sanity/schema-types/page-templates/base-page-type";
 import { coursePageType } from "@/sanity/schema-types/page-templates/course-page-type";
@@ -29,6 +30,7 @@ export const schema: SchemaTypeDefinition[] = [
   featuresType,
   faqType,
   faqsType,
+  navigationType,
 
   // Document types
   globalSettingsType,
@@ -39,4 +41,5 @@ export const schema: SchemaTypeDefinition[] = [
 
   // Utility types
   redirectType,
+  navigationLinkType,
 ];
