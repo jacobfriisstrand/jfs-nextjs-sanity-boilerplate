@@ -81,6 +81,29 @@ export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
   }
 }`);
 
+export const FOOTER_QUERY = defineQuery(`*[_type == "globalSettings"][0]{
+  companyName,
+  copyright,
+  vatNumberObject {
+    vatNumberHeading,
+    vatNumber
+  },
+  socialLinks {
+    ...,
+  },
+  contactInfo {
+    phone,
+    email
+  },
+  address {
+    streetName,
+    streetNumber,
+    floor,
+    city,
+    zipCode
+  }
+}`);
+
 export const CONTACT_INFO_QUERY = defineQuery(`*[_type == "globalSettings"][0]{
   contactInfo {
     phone,
