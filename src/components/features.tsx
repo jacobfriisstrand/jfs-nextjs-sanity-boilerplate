@@ -18,7 +18,7 @@ export function Features({ features, title }: FeaturesProps) {
 
       {Array.isArray(features)
         ? (
-            <div className="grid grid-cols-3 gap-8 min-h-[500vh]">
+            <div className="grid grid-cols-3 gap-8">
               {features.map(feature => (
                 <div key={feature._key} className="flex flex-col gap-4">
                   <h3 className="text-xl font-medium">

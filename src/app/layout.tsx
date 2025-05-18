@@ -73,7 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased ${plain.variable} ${bodoni.variable}`}
+        className={`antialiased ${plain.variable} ${bodoni.variable} grid min-h-dvh grid-rows-[auto_1fr_auto]`}
       >
         {children}
       </body>

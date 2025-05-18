@@ -30,7 +30,7 @@ export default function NavigationWrapper({ leftMenu, rightMenu, contactInfo }: 
   }, [isOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full">
+    <header className="sticky top-0 w-full">
       <NavigationHeader isOpen={isOpen} setIsOpen={setIsOpen} />
       <NavigationMenu
         leftMenu={leftMenu}
