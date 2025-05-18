@@ -189,6 +189,7 @@ export type GlobalSettings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  companyName?: string;
   favicon?: {
     asset?: {
       _ref: string;
@@ -204,6 +205,22 @@ export type GlobalSettings = {
   contactInfo?: {
     phone?: string;
     email?: string;
+  };
+  address?: {
+    streetName?: string;
+    streetNumber?: string;
+    floor?: string;
+    zipCode?: string;
+    city?: string;
+  };
+  socialLinks?: {
+    instagram?: string;
+    linkedIn?: string;
+  };
+  copyright?: string;
+  vatNumberObject?: {
+    vatNumberHeading?: string;
+    vatNumber?: string;
   };
 };
 
@@ -857,6 +874,7 @@ export type PAGE_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  companyName?: string;
   favicon?: {
     asset?: {
       _ref: string;
@@ -872,6 +890,22 @@ export type PAGE_QUERYResult = {
   contactInfo?: {
     phone?: string;
     email?: string;
+  };
+  address?: {
+    streetName?: string;
+    streetNumber?: string;
+    floor?: string;
+    zipCode?: string;
+    city?: string;
+  };
+  socialLinks?: {
+    instagram?: string;
+    linkedIn?: string;
+  };
+  copyright?: string;
+  vatNumberObject?: {
+    vatNumberHeading?: string;
+    vatNumber?: string;
   };
   seo: {
     title: null;
@@ -1297,6 +1331,31 @@ export type NAVIGATION_QUERYResult = {
     } | null;
   }> | null;
 } | null;
+// Variable: FOOTER_QUERY
+// Query: *[_type == "globalSettings"][0]{  companyName,  copyright,  vatNumberObject {    vatNumberHeading,    vatNumber  },  socialLinks {    ...,  },  contactInfo {    phone,    email  },  address {    streetName,    streetNumber,    floor,    city,    zipCode  }}
+export type FOOTER_QUERYResult = {
+  companyName: string | null;
+  copyright: string | null;
+  vatNumberObject: {
+    vatNumberHeading: string | null;
+    vatNumber: string | null;
+  } | null;
+  socialLinks: {
+    instagram?: string;
+    linkedIn?: string;
+  } | null;
+  contactInfo: {
+    phone: string | null;
+    email: string | null;
+  } | null;
+  address: {
+    streetName: string | null;
+    streetNumber: string | null;
+    floor: string | null;
+    city: string | null;
+    zipCode: string | null;
+  } | null;
+} | null;
 // Variable: CONTACT_INFO_QUERY
 // Query: *[_type == "globalSettings"][0]{  contactInfo {    phone,    email  }}
 export type CONTACT_INFO_QUERYResult = {
@@ -1668,6 +1727,7 @@ export type HOME_PAGE_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  companyName?: string;
   favicon?: {
     asset?: {
       _ref: string;
@@ -1683,6 +1743,22 @@ export type HOME_PAGE_QUERYResult = {
   contactInfo?: {
     phone?: string;
     email?: string;
+  };
+  address?: {
+    streetName?: string;
+    streetNumber?: string;
+    floor?: string;
+    zipCode?: string;
+    city?: string;
+  };
+  socialLinks?: {
+    instagram?: string;
+    linkedIn?: string;
+  };
+  copyright?: string;
+  vatNumberObject?: {
+    vatNumberHeading?: string;
+    vatNumber?: string;
   };
   seo: {
     title: null;
@@ -2112,6 +2188,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type in $pageTypes && slug.current == $slug][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n}": PAGE_QUERYResult;
     "*[_type == \"navigation\"][0]{\n  ...,\n  leftMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type\n    }\n  },\n  rightMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type\n    }\n  }\n}": NAVIGATION_QUERYResult;
+    "*[_type == \"globalSettings\"][0]{\n  companyName,\n  copyright,\n  vatNumberObject {\n    vatNumberHeading,\n    vatNumber\n  },\n  socialLinks {\n    ...,\n  },\n  contactInfo {\n    phone,\n    email\n  },\n  address {\n    streetName,\n    streetNumber,\n    floor,\n    city,\n    zipCode\n  }\n}": FOOTER_QUERYResult;
     "*[_type == \"globalSettings\"][0]{\n  contactInfo {\n    phone,\n    email\n  }\n}": CONTACT_INFO_QUERYResult;
     "*[_id == \"homePage\"][0]{\n    ...,\n    \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n    pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
