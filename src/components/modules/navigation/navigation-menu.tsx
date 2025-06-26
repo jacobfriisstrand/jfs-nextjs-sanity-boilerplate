@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
+import type { ExtendedNavigationLink } from "@/lib/utils/transform-navigation-link";
 import type { CONTACT_INFO_QUERYResult, NavigationLink } from "@/sanity/types";
 
 import { NAVIGATION_ANIMATION } from "@/components/modules/navigation/constants/navigation-animation";
 import ContactInfoBanner from "@/components/modules/navigation/contact-info-banner";
 import { useScrollTrigger } from "@/components/modules/navigation/hooks/use-scroll-trigger";
+import { getNavigationHref } from "@/lib/utils/transform-navigation-link";
 
 gsap.registerPlugin();
 
@@ -99,15 +101,18 @@ export default function NavigationMenu({ leftMenu, rightMenu, isOpen, onClose, c
   );
 
   const renderMenuLinks = (links: NavigationLink[]) => (
-    links.map((link) => {
+    links.map((link, index) => {
       if (!link.label)
         return null;
 
+      const href = getNavigationHref(link as ExtendedNavigationLink);
+      const isActive = pathname === href;
+
       return (
-        <li key={link.label} className="w-full">
+        <li key={index} className="w-full">
           <Link
-            href={link.url || "/"}
-            className={`${pathname === link.url ? "underline" : ""} w-full`}
+            href={href}
+            className={`${isActive ? "underline" : ""} w-full`}
             target={link.linkType === "external" ? "_blank" : undefined}
             onClick={onClose}
             tabIndex={isOpen ? 0 : -1}

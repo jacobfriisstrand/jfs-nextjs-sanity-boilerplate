@@ -88,6 +88,11 @@ export type NavigationLink = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "productPage";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "homePage";
   };
 };
 
@@ -101,6 +106,22 @@ export type Redirect = {
   destination?: string;
   permanent?: boolean;
   isEnabled?: boolean;
+};
+
+export type NotFoundPage = {
+  _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo?: Seo;
+  heading?: string;
+  subheading?: string;
+  linkList?: Array<{
+    _key: string;
+  } & NavigationLink>;
 };
 
 export type ProductPage = {
@@ -508,7 +529,7 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | NavigationLink | Redirect | ProductPage | CoursePage | HomePage | GenericPage | GlobalSettings | Navigation | Faqs | Faq | Features | TextAndImage | Hero | RichText | ImageFieldType | BasePage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | NavigationLink | Redirect | NotFoundPage | ProductPage | CoursePage | HomePage | GenericPage | GlobalSettings | Navigation | Faqs | Faq | Features | TextAndImage | Hero | RichText | ImageFieldType | BasePage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PAGE_QUERY
@@ -1077,6 +1098,37 @@ export type PAGE_QUERYResult = {
   pageBuilder: null;
 } | {
   _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  heading?: string;
+  subheading?: string;
+  linkList?: Array<{
+    _key: string;
+  } & NavigationLink>;
+  pageBuilder: null;
+} | {
+  _id: string;
   _type: "productPage";
   _createdAt: string;
   _updatedAt: string;
@@ -1290,8 +1342,431 @@ export type PAGE_QUERYResult = {
   };
   pageBuilder: null;
 } | null;
+// Variable: NOT_FOUND_PAGE_QUERY
+// Query: *[_id == "notFoundPage"][0]{  ...,    "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  heading,  subheading,  linkList[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  }}
+export type NOT_FOUND_PAGE_QUERYResult = {
+  _id: string;
+  _type: "basePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "coursePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder?: Array<{
+    _key: string;
+  } & Faqs | {
+    _key: string;
+  } & Features | {
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & TextAndImage>;
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "imageFieldType";
+    _key: string;
+  }>;
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "genericPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder?: Array<{
+    _key: string;
+  } & Faqs | {
+    _key: string;
+  } & Features | {
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & TextAndImage>;
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "globalSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  companyName?: string;
+  favicon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  contactInfo?: {
+    phone?: string;
+    email?: string;
+  };
+  address?: {
+    streetName?: string;
+    streetNumber?: string;
+    floor?: string;
+    zipCode?: string;
+    city?: string;
+  };
+  socialLinks?: {
+    instagram?: string;
+    linkedIn?: string;
+  };
+  copyright?: string;
+  vatNumberObject?: {
+    vatNumberHeading?: string;
+    vatNumber?: string;
+  };
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder?: Array<{
+    _key: string;
+  } & Faqs | {
+    _key: string;
+  } & Features | {
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & TextAndImage>;
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  leftMenu?: Array<{
+    _key: string;
+  } & NavigationLink>;
+  rightMenu?: Array<{
+    _key: string;
+  } & NavigationLink>;
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  heading: string | null;
+  subheading: string | null;
+  linkList: Array<{
+    _type: "navigationLink";
+    label: null | string;
+    linkType: null | "external" | "internal";
+    url: null | string;
+    page: {
+      _id: string;
+      _type: "coursePage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "genericPage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "homePage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "productPage";
+      slug: string | null;
+    } | null;
+  }> | null;
+} | {
+  _id: string;
+  _type: "productPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder?: Array<{
+    _key: string;
+  } & Faqs | {
+    _key: string;
+  } & Features | {
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & TextAndImage>;
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "redirect";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  source?: string;
+  destination?: string;
+  permanent?: boolean;
+  isEnabled?: boolean;
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+  seo: {
+    title: null;
+    description: "";
+    image: null;
+    noIndex: false;
+  };
+  heading: null;
+  subheading: null;
+  linkList: null;
+} | null;
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"][0]{  ...,  leftMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type    }  },  rightMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type    }  }}
+// Query: *[_type == "navigation"][0]{  ...,  leftMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  },  rightMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  }}
 export type NAVIGATION_QUERYResult = {
   _id: string;
   _type: "navigation";
@@ -1306,12 +1781,19 @@ export type NAVIGATION_QUERYResult = {
     page: {
       _id: string;
       _type: "coursePage";
+      slug: string | null;
     } | {
       _id: string;
       _type: "genericPage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "homePage";
+      slug: string | null;
     } | {
       _id: string;
       _type: "productPage";
+      slug: string | null;
     } | null;
   }> | null;
   rightMenu: Array<{
@@ -1322,12 +1804,19 @@ export type NAVIGATION_QUERYResult = {
     page: {
       _id: string;
       _type: "coursePage";
+      slug: string | null;
     } | {
       _id: string;
       _type: "genericPage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "homePage";
+      slug: string | null;
     } | {
       _id: string;
       _type: "productPage";
+      slug: string | null;
     } | null;
   }> | null;
 } | null;
@@ -1930,6 +2419,37 @@ export type HOME_PAGE_QUERYResult = {
   pageBuilder: null;
 } | {
   _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  heading?: string;
+  subheading?: string;
+  linkList?: Array<{
+    _key: string;
+  } & NavigationLink>;
+  pageBuilder: null;
+} | {
+  _id: string;
   _type: "productPage";
   _createdAt: string;
   _updatedAt: string;
@@ -2187,7 +2707,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type in $pageTypes && slug.current == $slug][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n}": PAGE_QUERYResult;
-    "*[_type == \"navigation\"][0]{\n  ...,\n  leftMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type\n    }\n  },\n  rightMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type\n    }\n  }\n}": NAVIGATION_QUERYResult;
+    "*[_id == \"notFoundPage\"][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  heading,\n  subheading,\n  linkList[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  }\n}": NOT_FOUND_PAGE_QUERYResult;
+    "*[_type == \"navigation\"][0]{\n  ...,\n  leftMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  },\n  rightMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  }\n}": NAVIGATION_QUERYResult;
     "*[_type == \"globalSettings\"][0]{\n  companyName,\n  copyright,\n  vatNumberObject {\n    vatNumberHeading,\n    vatNumber\n  },\n  socialLinks {\n    ...,\n  },\n  contactInfo {\n    phone,\n    email\n  },\n  address {\n    streetName,\n    streetNumber,\n    floor,\n    city,\n    zipCode\n  }\n}": FOOTER_QUERYResult;
     "*[_type == \"globalSettings\"][0]{\n  contactInfo {\n    phone,\n    email\n  }\n}": CONTACT_INFO_QUERYResult;
     "*[_id == \"homePage\"][0]{\n    ...,\n    \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n    pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n  }": HOME_PAGE_QUERYResult;

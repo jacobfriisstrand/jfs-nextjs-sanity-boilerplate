@@ -1,1 +1,1 @@
-export const PAGE_TYPES = ["genericPage", "homePage", "coursePage", "productPage"];
+export const PAGE_TYPES = ["genericPage", "homePage", "coursePage", "productPage", "notFoundPage"];

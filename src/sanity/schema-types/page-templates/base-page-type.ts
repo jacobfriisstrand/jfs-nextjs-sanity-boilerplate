@@ -22,9 +22,9 @@ export const basePageType = defineType({
         source: "title",
       },
       description: "This is used to generate the URL for the page, and can be generated from the title.",
-      hidden: ({ document }) => document?._type === "homePage",
+      hidden: ({ document }) => document?._type === "homePage" || document?._type === "notFoundPage",
       validation: rule => rule.custom((slug, context) => {
-        if (context.document?._type === "homePage") {
+        if (context.document?._type === "homePage" || context.document?._type === "notFoundPage") {
           return true;
         }
         if (!slug?.current) {

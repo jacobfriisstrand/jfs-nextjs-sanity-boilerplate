@@ -57,6 +57,24 @@ export const PAGE_QUERY = defineQuery(`*[_type in $pageTypes && slug.current == 
   ${CONTENT_QUERY}
 }`);
 
+export const NOT_FOUND_PAGE_QUERY = defineQuery(`*[_id == "notFoundPage"][0]{
+  ...,
+  ${SEO_QUERY}
+  heading,
+  subheading,
+  linkList[]{
+    _type,
+    "label": select(label == null => undefined, label),
+    "linkType": select(linkType == null => undefined, linkType),
+    "url": select(url == null => undefined, url),
+    "page": page->{
+      _id,
+      _type,
+      "slug": slug.current
+    }
+  }
+}`);
+
 export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
   ...,
   leftMenu[]{
@@ -66,7 +84,8 @@ export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
     "url": select(url == null => undefined, url),
     "page": page->{
       _id,
-      _type
+      _type,
+      "slug": slug.current
     }
   },
   rightMenu[]{
@@ -76,7 +95,8 @@ export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
     "url": select(url == null => undefined, url),
     "page": page->{
       _id,
-      _type
+      _type,
+      "slug": slug.current
     }
   }
 }`);
