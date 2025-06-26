@@ -119,9 +119,6 @@ export type NotFoundPage = {
   seo?: Seo;
   heading?: string;
   subheading?: string;
-  linkList?: Array<{
-    _key: string;
-  } & NavigationLink>;
 };
 
 export type ProductPage = {
@@ -251,10 +248,7 @@ export type Navigation = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  leftMenu?: Array<{
-    _key: string;
-  } & NavigationLink>;
-  rightMenu?: Array<{
+  menu?: Array<{
     _key: string;
   } & NavigationLink>;
 };
@@ -1083,10 +1077,7 @@ export type PAGE_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  leftMenu?: Array<{
-    _key: string;
-  } & NavigationLink>;
-  rightMenu?: Array<{
+  menu?: Array<{
     _key: string;
   } & NavigationLink>;
   seo: {
@@ -1123,9 +1114,6 @@ export type PAGE_QUERYResult = {
   };
   heading?: string;
   subheading?: string;
-  linkList?: Array<{
-    _key: string;
-  } & NavigationLink>;
   pageBuilder: null;
 } | {
   _id: string;
@@ -1343,7 +1331,7 @@ export type PAGE_QUERYResult = {
   pageBuilder: null;
 } | null;
 // Variable: NOT_FOUND_PAGE_QUERY
-// Query: *[_id == "notFoundPage"][0]{  ...,    "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  heading,  subheading,  linkList[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  }}
+// Query: *[_id == "notFoundPage"][0]{  ...,    "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  heading,  subheading,}
 export type NOT_FOUND_PAGE_QUERYResult = {
   _id: string;
   _type: "basePage";
@@ -1371,7 +1359,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "coursePage";
@@ -1408,7 +1395,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   } & TextAndImage>;
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "faq";
@@ -1455,7 +1441,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "genericPage";
@@ -1492,7 +1477,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   } & TextAndImage>;
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "globalSettings";
@@ -1540,7 +1524,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "homePage";
@@ -1577,17 +1560,13 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   } & TextAndImage>;
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "navigation";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  leftMenu?: Array<{
-    _key: string;
-  } & NavigationLink>;
-  rightMenu?: Array<{
+  menu?: Array<{
     _key: string;
   } & NavigationLink>;
   seo: {
@@ -1598,7 +1577,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "notFoundPage";
@@ -1626,29 +1604,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: string | null;
   subheading: string | null;
-  linkList: Array<{
-    _type: "navigationLink";
-    label: null | string;
-    linkType: null | "external" | "internal";
-    url: null | string;
-    page: {
-      _id: string;
-      _type: "coursePage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "genericPage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "homePage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "productPage";
-      slug: string | null;
-    } | null;
-  }> | null;
 } | {
   _id: string;
   _type: "productPage";
@@ -1685,7 +1640,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   } & TextAndImage>;
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "redirect";
@@ -1704,7 +1658,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "sanity.fileAsset";
@@ -1733,7 +1686,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | {
   _id: string;
   _type: "sanity.imageAsset";
@@ -1763,17 +1715,16 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   };
   heading: null;
   subheading: null;
-  linkList: null;
 } | null;
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"][0]{  ...,  leftMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  },  rightMenu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  }}
+// Query: *[_type == "navigation"][0]{  ...,  menu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  },}
 export type NAVIGATION_QUERYResult = {
   _id: string;
   _type: "navigation";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  leftMenu: Array<{
+  menu: Array<{
     _type: "navigationLink";
     label: null | string;
     linkType: null | "external" | "internal";
@@ -1796,62 +1747,6 @@ export type NAVIGATION_QUERYResult = {
       slug: string | null;
     } | null;
   }> | null;
-  rightMenu: Array<{
-    _type: "navigationLink";
-    label: null | string;
-    linkType: null | "external" | "internal";
-    url: null | string;
-    page: {
-      _id: string;
-      _type: "coursePage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "genericPage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "homePage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "productPage";
-      slug: string | null;
-    } | null;
-  }> | null;
-} | null;
-// Variable: FOOTER_QUERY
-// Query: *[_type == "globalSettings"][0]{  companyName,  copyright,  vatNumberObject {    vatNumberHeading,    vatNumber  },  socialLinks {    ...,  },  contactInfo {    phone,    email  },  address {    streetName,    streetNumber,    floor,    city,    zipCode  }}
-export type FOOTER_QUERYResult = {
-  companyName: string | null;
-  copyright: string | null;
-  vatNumberObject: {
-    vatNumberHeading: string | null;
-    vatNumber: string | null;
-  } | null;
-  socialLinks: {
-    instagram?: string;
-    linkedIn?: string;
-  } | null;
-  contactInfo: {
-    phone: string | null;
-    email: string | null;
-  } | null;
-  address: {
-    streetName: string | null;
-    streetNumber: string | null;
-    floor: string | null;
-    city: string | null;
-    zipCode: string | null;
-  } | null;
-} | null;
-// Variable: CONTACT_INFO_QUERY
-// Query: *[_type == "globalSettings"][0]{  contactInfo {    phone,    email  }}
-export type CONTACT_INFO_QUERYResult = {
-  contactInfo: {
-    phone: string | null;
-    email: string | null;
-  } | null;
 } | null;
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "homePage"][0]{    ...,      "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },    pageBuilder[]{  ...,  _type == "faqs" => {    ...,    faqs[]->{    _id,    title,    body,    "text": pt::text(body)}  },  _type == "hero" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  },  _type == "textAndImage" => {    ...,    image {  ...,  alt,  asset-> {    _id,    _type,    url,    dimensions {      _type,      aspectRatio,      height,      width    }  }}  }}  }
@@ -2404,10 +2299,7 @@ export type HOME_PAGE_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  leftMenu?: Array<{
-    _key: string;
-  } & NavigationLink>;
-  rightMenu?: Array<{
+  menu?: Array<{
     _key: string;
   } & NavigationLink>;
   seo: {
@@ -2444,9 +2336,6 @@ export type HOME_PAGE_QUERYResult = {
   };
   heading?: string;
   subheading?: string;
-  linkList?: Array<{
-    _key: string;
-  } & NavigationLink>;
   pageBuilder: null;
 } | {
   _id: string;
@@ -2707,10 +2596,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type in $pageTypes && slug.current == $slug][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n}": PAGE_QUERYResult;
-    "*[_id == \"notFoundPage\"][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  heading,\n  subheading,\n  linkList[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  }\n}": NOT_FOUND_PAGE_QUERYResult;
-    "*[_type == \"navigation\"][0]{\n  ...,\n  leftMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  },\n  rightMenu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  }\n}": NAVIGATION_QUERYResult;
-    "*[_type == \"globalSettings\"][0]{\n  companyName,\n  copyright,\n  vatNumberObject {\n    vatNumberHeading,\n    vatNumber\n  },\n  socialLinks {\n    ...,\n  },\n  contactInfo {\n    phone,\n    email\n  },\n  address {\n    streetName,\n    streetNumber,\n    floor,\n    city,\n    zipCode\n  }\n}": FOOTER_QUERYResult;
-    "*[_type == \"globalSettings\"][0]{\n  contactInfo {\n    phone,\n    email\n  }\n}": CONTACT_INFO_QUERYResult;
+    "*[_id == \"notFoundPage\"][0]{\n  ...,\n  \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n  heading,\n  subheading,\n}": NOT_FOUND_PAGE_QUERYResult;
+    "*[_type == \"navigation\"][0]{\n  ...,\n  menu[]{\n    _type,\n    \"label\": select(label == null => undefined, label),\n    \"linkType\": select(linkType == null => undefined, linkType),\n    \"url\": select(url == null => undefined, url),\n    \"page\": page->{\n      _id,\n      _type,\n      \"slug\": slug.current\n    }\n  },\n}": NAVIGATION_QUERYResult;
     "*[_id == \"homePage\"][0]{\n    ...,\n    \n  \"seo\": {\n    \"title\": seo.title,\n    \"description\": coalesce(seo.description,  \"\"),\n    \"image\": seo.image,\n    \"noIndex\": seo.noIndex == true\n  },\n\n    pageBuilder[]{\n  ...,\n  _type == \"faqs\" => {\n    ...,\n    faqs[]->{\n    _id,\n    title,\n    body,\n    \"text\": pt::text(body)\n}\n  },\n  _type == \"hero\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  },\n  _type == \"textAndImage\" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> {\n    _id,\n    _type,\n    url,\n    dimensions {\n      _type,\n      aspectRatio,\n      height,\n      width\n    }\n  }\n}\n  }\n}\n  }": HOME_PAGE_QUERYResult;
     "\n  *[_type == \"redirect\" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n": REDIRECTS_QUERYResult;
     "\n  *[_id == $id][0]{\n    title,\n    \"image\": seo.image {\n      ...,\n      asset-> {\n        _id,\n        _type,\n        url,\n        metadata {\n          palette\n        }\n      }\n    }\n  }    \n": OG_IMAGE_QUERYResult;

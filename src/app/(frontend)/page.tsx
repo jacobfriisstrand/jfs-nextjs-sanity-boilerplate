@@ -10,7 +10,6 @@ type RouteProps = {
   params: Promise<{ slug: string }>;
 };
 
-// TODO: Change this page to accept a query from the singleton homePage that exists only in the Sanity structure
 async function getPage(params: RouteProps["params"]) {
   return sanityFetch({
     query: HOME_PAGE_QUERY,

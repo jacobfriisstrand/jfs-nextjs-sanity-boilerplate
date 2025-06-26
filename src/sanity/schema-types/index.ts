@@ -8,11 +8,10 @@ import { heroType } from "@/sanity/schema-types/modules/hero-type";
 import { navigationType } from "@/sanity/schema-types/modules/navigation-type";
 import { textAndImageType } from "@/sanity/schema-types/modules/text-and-image-type";
 import { basePageType } from "@/sanity/schema-types/page-templates/base-page-type";
-import { coursePageType } from "@/sanity/schema-types/page-templates/course-page-type";
-import { genericPageType } from "@/sanity/schema-types/page-templates/generic-page-type";
 import { homePageType } from "@/sanity/schema-types/page-templates/home-page-type";
 import { notFoundPageType } from "@/sanity/schema-types/page-templates/not-found-page-type";
-import { productPageType } from "@/sanity/schema-types/page-templates/product-page-type";
+import { pageTypeOneType } from "@/sanity/schema-types/page-templates/page-type-one-type";
+import { pageTypeTwoType } from "@/sanity/schema-types/page-templates/page-type-two-type";
 import { imageFieldType } from "@/sanity/schema-types/utilities/image-field-type";
 import { navigationLinkType } from "@/sanity/schema-types/utilities/navigation-link-type";
 import { redirectType } from "@/sanity/schema-types/utilities/redirect-type";
@@ -36,10 +35,9 @@ export const schema: SchemaTypeDefinition[] = [
 
   // Document types
   globalSettingsType,
-  genericPageType,
+  pageTypeOneType,
   homePageType,
-  coursePageType,
-  productPageType,
+  pageTypeTwoType,
   notFoundPageType,
 
   // Utility types

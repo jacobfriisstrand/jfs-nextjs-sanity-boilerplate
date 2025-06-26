@@ -15,7 +15,7 @@ export function Hero({ title, text, image }: HeroProps) {
       <div>
         {title
           ? (
-              <h1>
+              <h1 className="text-4xl font-bold text-center mt-auto">
                 {title}
               </h1>
             )
@@ -24,7 +24,6 @@ export function Hero({ title, text, image }: HeroProps) {
           {text ? <PortableText value={text} /> : null}
         </div>
       </div>
-      <div />
       {image
         ? (
             <SanityImage

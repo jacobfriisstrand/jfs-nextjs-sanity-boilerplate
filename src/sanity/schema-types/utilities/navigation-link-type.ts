@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 
+import { PAGE_TYPES } from "@/sanity/constants/page-types";
+
 export const navigationLinkType = defineType({
   name: "navigationLink",
   type: "object",
@@ -46,7 +48,7 @@ export const navigationLinkType = defineType({
         }
         return true;
       }),
-      to: [{ type: "genericPage" }, { type: "coursePage" }, { type: "productPage" }, { type: "homePage" }],
+      to: PAGE_TYPES.map(type => ({ type })),
       hidden: ({ parent }) => parent?.linkType !== "internal",
     }),
   ],

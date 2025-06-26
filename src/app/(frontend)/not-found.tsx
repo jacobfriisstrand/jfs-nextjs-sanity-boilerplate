@@ -1,12 +1,5 @@
-// TODO: Change navigation text color to be chosen on each page template
-
 import type { Metadata } from "next";
 
-import Link from "next/link";
-
-import type { ExtendedNavigationLink } from "@/lib/utils/transform-navigation-link";
-
-import { transformNavigationLinks } from "@/lib/utils/transform-navigation-link";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { NOT_FOUND_PAGE_QUERY } from "@/sanity/lib/queries";
@@ -51,21 +44,8 @@ export default async function NotFound() {
 
   return (
     <main>
-      <h1 className="text-4xl font-bold">{page?.heading}</h1>
+      <h1 className="text-4xl font-bold text-center">{page?.heading}</h1>
       <p className="mt-4 text-lg">{page?.subheading}</p>
-      {page?.linkList && page.linkList.length > 0 && (
-        <div className="mt-8 flex gap-4">
-          {transformNavigationLinks(page.linkList).map((link: ExtendedNavigationLink, index: number) => (
-            <Link
-              key={index}
-              href={link.url || (link.page?.slug ? `/${link.page.slug}` : "/")}
-              className="text-black hover:underline"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      )}
     </main>
   );
 }

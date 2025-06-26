@@ -11,9 +11,9 @@ export const studioClient = client.withConfig({ apiVersion });
 
 const genericPageModules = ["hero", "textAndImage", "features", "faqs"];
 
-export const genericPageType = defineType({
-  name: "genericPage",
-  title: "Generic Page",
+export const pageTypeOneType = defineType({
+  name: "pageTypeOne",
+  title: "Page type one",
   type: "document",
   icon: () => "📄",
   fields: [

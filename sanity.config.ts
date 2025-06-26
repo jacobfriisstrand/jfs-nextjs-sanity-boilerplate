@@ -19,7 +19,7 @@ import { structure } from "./src/sanity/structure";
 export default defineConfig([
   {
     name: "production",
-    title: isDev ? "Production" : "Grund CPH",
+    title: isDev ? "Production" : "Template Company",
     basePath: "/admin",
     projectId,
     dataset: "production",
