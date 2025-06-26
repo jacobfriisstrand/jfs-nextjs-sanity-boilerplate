@@ -17,12 +17,12 @@ export const structure: StructureResolver = S =>
             .schemaType("homePage")
             .documentId("homePage"),
         ),
-      S.documentTypeListItem("genericPage").title("Generic Pages"),
+      S.documentTypeListItem("genericPage").title("Generic pages"),
       S.documentTypeListItem("coursePage").title("Courses"),
       S.documentTypeListItem("productPage").title("Products"),
       S.divider().title("Settings"),
       S.listItem()
-        .title("Global Settings")
+        .title("Global settings")
         .icon(() => "🔧")
         .child(
           S.editor()
@@ -40,9 +40,19 @@ export const structure: StructureResolver = S =>
             .title("Navigation")
             .documentId("navigation"),
         ),
+      S.listItem()
+        .title("Not found page")
+        .icon(() => "🚨")
+        .child(
+          S.editor()
+            .id("notFoundPage")
+            .schemaType("notFoundPage")
+            .title("Not found page")
+            .documentId("notFoundPage"),
+        ),
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage", "navigation"].includes(item.getId()!),
+          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage", "navigation", "notFoundPage"].includes(item.getId()!),
       ),
     ]);

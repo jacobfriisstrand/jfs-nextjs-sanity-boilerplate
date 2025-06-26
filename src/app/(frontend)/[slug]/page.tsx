@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { notFound } from "next/navigation";
+
 import { PageBuilderWrapper } from "@/components/page-builder-wrapper";
 import { PAGE_TYPES } from "@/sanity/constants/page-types";
 import { urlFor } from "@/sanity/lib/image";
@@ -56,10 +58,14 @@ export async function generateMetadata({
 export default async function Page({ params }: RouteProps) {
   const { data: page } = await getPage(params);
 
+  if (!page) {
+    notFound();
+  }
+
   return (
     <>
-      <title>{page?.seo?.title}</title>
-      {page?.pageBuilder ? <PageBuilderWrapper modules={page.pageBuilder} documentId={page._id} documentType={PAGE_TYPES[0]} /> : null}
+      <title>{page.seo.title}</title>
+      {page.pageBuilder ? <PageBuilderWrapper modules={page.pageBuilder} documentId={page._id} documentType={PAGE_TYPES[0]} /> : null}
     </>
   );
 }
