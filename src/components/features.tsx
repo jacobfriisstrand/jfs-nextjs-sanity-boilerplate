@@ -1,13 +1,13 @@
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
 type FeaturesProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
   { _type: "features" }
 >;
 
 export function Features({ features, title }: FeaturesProps) {
   return (
-    <section className="container mx-auto flex flex-col gap-8 py-16 text-center">
+    <section className="mx-auto flex flex-col gap-8 py-16 text-center">
       {title
         ? (
             <h2 className="text-3xl font-medium text-center">

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
+import { notFound } from "next/navigation";
+
 import { PageBuilderWrapper } from "@/components/page-builder-wrapper";
+import { PAGE_TYPES } from "@/sanity/constants/page-types";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
@@ -10,9 +13,14 @@ type RouteProps = {
 };
 
 async function getPage(params: RouteProps["params"]) {
+  const resolvedParams = await params;
+
   return sanityFetch({
     query: PAGE_QUERY,
-    params: await params,
+    params: {
+      slug: resolvedParams.slug,
+      pageTypes: PAGE_TYPES,
+    },
   });
 }
 
@@ -50,10 +58,14 @@ export async function generateMetadata({
 export default async function Page({ params }: RouteProps) {
   const { data: page } = await getPage(params);
 
+  if (!page) {
+    notFound();
+  }
+
   return (
     <>
-      <title>{page?.seo?.title}</title>
-      {page?.content ? <PageBuilderWrapper content={page.content} documentId={page._id} documentType="page" /> : null}
+      <title>{page.seo.title}</title>
+      {page.pageBuilder ? <PageBuilderWrapper modules={page.pageBuilder} documentId={page._id} documentType={PAGE_TYPES[0]} /> : null}
     </>
   );
 }

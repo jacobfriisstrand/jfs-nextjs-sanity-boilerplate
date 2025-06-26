@@ -1,7 +1,6 @@
 "use client";
 
 import { createDataAttribute } from "next-sanity";
-import { useEffect, useState } from "react";
 
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
@@ -12,7 +11,7 @@ import { TextAndImage } from "@/components/text-and-image";
 import { createDataAttributeConfig } from "@/sanity/lib/data-attribute-config";
 
 type PageBuilderProps = {
-  content: NonNullable<PAGE_QUERYResult>["content"];
+  modules: NonNullable<PAGE_QUERYResult>["pageBuilder"];
   documentId: string;
   documentType: string;
 };
@@ -30,6 +29,7 @@ function DragHandle({
 }) {
   return (
     <div
+      className="wrapper"
       data-sanity={createDataAttribute({
         ...createDataAttributeConfig,
         id: documentId,
@@ -43,18 +43,12 @@ function DragHandle({
 }
 
 export function PageBuilder({
-  content,
+  modules,
   documentId,
   documentType,
 }: PageBuilderProps) {
-  // Ensure content is an array before using useState
-  const initialContent = Array.isArray(content) ? content : [];
-  const [blocks, setBlocks] = useState(initialContent);
-
-  // Update blocks when content changes
-  useEffect(() => {
-    setBlocks(initialContent);
-  }, [initialContent]);
+  // Ensure content is an array
+  const blocks = Array.isArray(modules) ? modules : [];
 
   return (
     <main
@@ -62,7 +56,7 @@ export function PageBuilder({
         ...createDataAttributeConfig,
         id: documentId,
         type: documentType,
-        path: "content",
+        path: "pageBuilder",
       }).toString()}
     >
       {blocks.map((block) => {

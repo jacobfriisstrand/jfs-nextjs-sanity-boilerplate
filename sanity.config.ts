@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * This configuration is used to for the Sanity Studio that’s mounted on the `/app/admin/[[...tool]]/page.tsx` route
+ * This configuration is used to for the Sanity Studio that's mounted on the `/app/admin/[[...tool]]/page.tsx` route
  */
 
 import { visionTool } from "@sanity/vision";
@@ -12,42 +12,59 @@ import { structureTool } from "sanity/structure";
 import { resolve } from "@/sanity/presentation/resolve";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import { apiVersion, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schema-types";
 import { structure } from "./src/sanity/structure";
 
-export default defineConfig({
-  basePath: "/admin",
-  // TODO: Change this to the name of the website
-  title: "Your Website Name",
-  projectId,
-  dataset,
-  schema,
-  plugins: isDev
-    ? [
-        structureTool({ structure }),
-        visionTool({ defaultApiVersion: apiVersion }),
-        presentationTool({
-          resolve,
-          previewUrl: {
-            previewMode: {
-              enable: "/api/draft-mode/enable",
-            },
+export default defineConfig([
+  {
+    name: "production",
+    title: isDev ? "Production" : "Template Company",
+    basePath: "/admin",
+    projectId,
+    dataset: "production",
+    plugins: [
+      structureTool({ structure }),
+      presentationTool({
+        resolve,
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
           },
-        }),
-      ]
-    : [
-        structureTool({ structure }),
-        presentationTool({
-          resolve,
-          previewUrl: {
-            previewMode: {
-              enable: "/api/draft-mode/enable",
-            },
-          },
-        }),
-      ],
-  document: {
-    newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
+        },
+      }),
+    ],
+    schema: {
+      types: schema,
+    },
+    document: {
+      newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
+    },
   },
-});
+  // TODO: set up testing environment?
+  {
+    name: "development",
+    title: "Development",
+    basePath: "/admin-dev",
+    projectId,
+    dataset: "development",
+    plugins: [
+      structureTool({ structure }),
+      visionTool({ defaultApiVersion: apiVersion }),
+      presentationTool({
+        resolve,
+        previewUrl: {
+          previewMode: {
+            enable: "/api/draft-mode/enable",
+          },
+        },
+      }),
+    ],
+    schema: {
+      types: schema,
+    },
+    document: {
+      newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
+    },
+  },
+]);

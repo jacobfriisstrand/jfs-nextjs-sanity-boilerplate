@@ -5,14 +5,14 @@ import type { PAGE_QUERYResult } from "@/sanity/types";
 import { SanityImage } from "@/components/sanity-image";
 
 type TextAndImageProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
   { _type: "textAndImage" }
 >;
 
 export function TextAndImage({ title, image, orientation }: TextAndImageProps) {
   return (
     <section
-      className="container mx-auto flex gap-8 py-16"
+      className="mx-auto flex gap-8 py-16"
       data-orientation={stegaClean(orientation) || "imageLeft"}
     >
       {image

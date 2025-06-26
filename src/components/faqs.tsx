@@ -22,7 +22,7 @@ function generateFaqData(faqs: FAQsProps["faqs"]): WithContext<FAQPage> {
 }
 
 type FAQsProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
+  NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
   { _type: "faqs" }
 >;
 
@@ -30,7 +30,7 @@ export function FAQs({ _key, title, faqs }: FAQsProps) {
   const faqData = generateFaqData(faqs);
 
   return (
-    <section className="container mx-auto flex flex-col gap-8 py-16">
+    <section className="mx-auto flex flex-col gap-8 py-16">
       <JSONLD data={faqData} />
       {title
         ? (
