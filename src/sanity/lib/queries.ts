@@ -25,7 +25,6 @@ const SEO_QUERY = `
   },
 `;
 
-// TODO: FIx the pagebuilder data not rendering in the frontend
 const CONTENT_QUERY = `pageBuilder[]{
   ...,
   _type == "faqs" => {
@@ -62,22 +61,11 @@ export const NOT_FOUND_PAGE_QUERY = defineQuery(`*[_id == "notFoundPage"][0]{
   ${SEO_QUERY}
   heading,
   subheading,
-  linkList[]{
-    _type,
-    "label": select(label == null => undefined, label),
-    "linkType": select(linkType == null => undefined, linkType),
-    "url": select(url == null => undefined, url),
-    "page": page->{
-      _id,
-      _type,
-      "slug": slug.current
-    }
-  }
 }`);
 
 export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
   ...,
-  leftMenu[]{
+  menu[]{
     _type,
     "label": select(label == null => undefined, label),
     "linkType": select(linkType == null => undefined, linkType),
@@ -88,50 +76,8 @@ export const NAVIGATION_QUERY = defineQuery(`*[_type == "navigation"][0]{
       "slug": slug.current
     }
   },
-  rightMenu[]{
-    _type,
-    "label": select(label == null => undefined, label),
-    "linkType": select(linkType == null => undefined, linkType),
-    "url": select(url == null => undefined, url),
-    "page": page->{
-      _id,
-      _type,
-      "slug": slug.current
-    }
-  }
 }`);
 
-export const FOOTER_QUERY = defineQuery(`*[_type == "globalSettings"][0]{
-  companyName,
-  copyright,
-  vatNumberObject {
-    vatNumberHeading,
-    vatNumber
-  },
-  socialLinks {
-    ...,
-  },
-  contactInfo {
-    phone,
-    email
-  },
-  address {
-    streetName,
-    streetNumber,
-    floor,
-    city,
-    zipCode
-  }
-}`);
-
-export const CONTACT_INFO_QUERY = defineQuery(`*[_type == "globalSettings"][0]{
-  contactInfo {
-    phone,
-    email
-  }
-}`);
-
-// TODO: Change the home page query, as it is not in the globalSettings anymore.
 export const HOME_PAGE_QUERY = defineQuery(`*[_id == "homePage"][0]{
     ...,
     ${SEO_QUERY}

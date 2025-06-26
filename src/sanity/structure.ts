@@ -17,9 +17,8 @@ export const structure: StructureResolver = S =>
             .schemaType("homePage")
             .documentId("homePage"),
         ),
-      S.documentTypeListItem("genericPage").title("Generic pages"),
-      S.documentTypeListItem("coursePage").title("Courses"),
-      S.documentTypeListItem("productPage").title("Products"),
+      S.documentTypeListItem("pageTypeOne").title("Page type one"),
+      S.documentTypeListItem("pageTypeTwo").title("Page type two"),
       S.divider().title("Settings"),
       S.listItem()
         .title("Global settings")
@@ -53,6 +52,6 @@ export const structure: StructureResolver = S =>
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["genericPage", "faq", "globalSettings", "basePage", "homePage", "coursePage", "productPage", "navigation", "notFoundPage"].includes(item.getId()!),
+          && !["pageTypeOne", "faq", "globalSettings", "basePage", "homePage", "pageTypeTwo", "navigation", "notFoundPage"].includes(item.getId()!),
       ),
     ]);

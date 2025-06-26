@@ -19,12 +19,6 @@ export const notFoundPageType = defineType({
       title: "Subheading",
       type: "text",
     }),
-    defineField({
-      name: "linkList",
-      title: "Link List",
-      type: "array",
-      of: [{ type: "navigationLink" }],
-    }),
   ],
   preview: basePageType.preview,
 });
