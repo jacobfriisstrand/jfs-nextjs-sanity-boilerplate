@@ -77,22 +77,22 @@ export type NavigationLink = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "genericPage";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "coursePage";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "productPage";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "homePage";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "notFoundPage";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "pageTypeOne";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "pageTypeTwo";
   };
 };
 
@@ -121,29 +121,9 @@ export type NotFoundPage = {
   subheading?: string;
 };
 
-export type ProductPage = {
+export type PageTypeTwo = {
   _id: string;
-  _type: "productPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo?: Seo;
-  pageBuilder?: Array<{
-    _key: string;
-  } & Hero | {
-    _key: string;
-  } & TextAndImage | {
-    _key: string;
-  } & Features | {
-    _key: string;
-  } & Faqs>;
-};
-
-export type CoursePage = {
-  _id: string;
-  _type: "coursePage";
+  _type: "pageTypeTwo";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -181,9 +161,9 @@ export type HomePage = {
   } & Faqs>;
 };
 
-export type GenericPage = {
+export type PageTypeOne = {
   _id: string;
-  _type: "genericPage";
+  _type: "pageTypeOne";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -523,7 +503,7 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | NavigationLink | Redirect | NotFoundPage | ProductPage | CoursePage | HomePage | GenericPage | GlobalSettings | Navigation | Faqs | Faq | Features | TextAndImage | Hero | RichText | ImageFieldType | BasePage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | NavigationLink | Redirect | NotFoundPage | PageTypeTwo | HomePage | PageTypeOne | GlobalSettings | Navigation | Faqs | Faq | Features | TextAndImage | Hero | RichText | ImageFieldType | BasePage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: PAGE_QUERY
@@ -554,148 +534,6 @@ export type PAGE_QUERYResult = {
     noIndex: boolean | false;
   };
   pageBuilder: null;
-} | {
-  _id: string;
-  _type: "coursePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder: Array<{
-    _key: string;
-    _type: "faqs";
-    title?: string;
-    faqs: Array<{
-      _id: string;
-      title: string | null;
-      body: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: "imageFieldType";
-        _key: string;
-      }> | null;
-      text: string;
-    }> | null;
-  } | {
-    _key: string;
-    _type: "features";
-    title?: string;
-    features?: Array<{
-      title?: string;
-      text?: string;
-      _type: "feature";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "imageFieldType";
-      _key: string;
-    }>;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  } | {
-    _key: string;
-    _type: "textAndImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  }> | null;
 } | {
   _id: string;
   _type: "faq";
@@ -741,148 +579,6 @@ export type PAGE_QUERYResult = {
     noIndex: false;
   };
   pageBuilder: null;
-} | {
-  _id: string;
-  _type: "genericPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder: Array<{
-    _key: string;
-    _type: "faqs";
-    title?: string;
-    faqs: Array<{
-      _id: string;
-      title: string | null;
-      body: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: "imageFieldType";
-        _key: string;
-      }> | null;
-      text: string;
-    }> | null;
-  } | {
-    _key: string;
-    _type: "features";
-    title?: string;
-    features?: Array<{
-      title?: string;
-      text?: string;
-      _type: "feature";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "imageFieldType";
-      _key: string;
-    }>;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  } | {
-    _key: string;
-    _type: "textAndImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  }> | null;
 } | {
   _id: string;
   _type: "globalSettings";
@@ -1117,7 +813,149 @@ export type PAGE_QUERYResult = {
   pageBuilder: null;
 } | {
   _id: string;
-  _type: "productPage";
+  _type: "pageTypeOne";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder: Array<{
+    _key: string;
+    _type: "faqs";
+    title?: string;
+    faqs: Array<{
+      _id: string;
+      title: string | null;
+      body: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "imageFieldType";
+        _key: string;
+      }> | null;
+      text: string;
+    }> | null;
+  } | {
+    _key: string;
+    _type: "features";
+    title?: string;
+    features?: Array<{
+      title?: string;
+      text?: string;
+      _type: "feature";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
+    _type: "hero";
+    title?: string;
+    text?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "imageFieldType";
+      _key: string;
+    }>;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "imageFieldType";
+    } | null;
+  } | {
+    _key: string;
+    _type: "textAndImage";
+    orientation?: "imageLeft" | "imageRight";
+    title?: string;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "imageFieldType";
+    } | null;
+  }> | null;
+} | {
+  _id: string;
+  _type: "pageTypeTwo";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -1361,42 +1199,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   subheading: null;
 } | {
   _id: string;
-  _type: "coursePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder?: Array<{
-    _key: string;
-  } & Faqs | {
-    _key: string;
-  } & Features | {
-    _key: string;
-  } & Hero | {
-    _key: string;
-  } & TextAndImage>;
-  heading: null;
-  subheading: null;
-} | {
-  _id: string;
   _type: "faq";
   _createdAt: string;
   _updatedAt: string;
@@ -1439,42 +1241,6 @@ export type NOT_FOUND_PAGE_QUERYResult = {
     image: null;
     noIndex: false;
   };
-  heading: null;
-  subheading: null;
-} | {
-  _id: string;
-  _type: "genericPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder?: Array<{
-    _key: string;
-  } & Faqs | {
-    _key: string;
-  } & Features | {
-    _key: string;
-  } & Hero | {
-    _key: string;
-  } & TextAndImage>;
   heading: null;
   subheading: null;
 } | {
@@ -1606,7 +1372,43 @@ export type NOT_FOUND_PAGE_QUERYResult = {
   subheading: string | null;
 } | {
   _id: string;
-  _type: "productPage";
+  _type: "pageTypeOne";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder?: Array<{
+    _key: string;
+  } & Faqs | {
+    _key: string;
+  } & Features | {
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & TextAndImage>;
+  heading: null;
+  subheading: null;
+} | {
+  _id: string;
+  _type: "pageTypeTwo";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -1731,19 +1533,19 @@ export type NAVIGATION_QUERYResult = {
     url: null | string;
     page: {
       _id: string;
-      _type: "coursePage";
-      slug: string | null;
-    } | {
-      _id: string;
-      _type: "genericPage";
-      slug: string | null;
-    } | {
-      _id: string;
       _type: "homePage";
       slug: string | null;
     } | {
       _id: string;
-      _type: "productPage";
+      _type: "notFoundPage";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "pageTypeOne";
+      slug: string | null;
+    } | {
+      _id: string;
+      _type: "pageTypeTwo";
       slug: string | null;
     } | null;
   }> | null;
@@ -1776,148 +1578,6 @@ export type HOME_PAGE_QUERYResult = {
     noIndex: boolean | false;
   };
   pageBuilder: null;
-} | {
-  _id: string;
-  _type: "coursePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder: Array<{
-    _key: string;
-    _type: "faqs";
-    title?: string;
-    faqs: Array<{
-      _id: string;
-      title: string | null;
-      body: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: "imageFieldType";
-        _key: string;
-      }> | null;
-      text: string;
-    }> | null;
-  } | {
-    _key: string;
-    _type: "features";
-    title?: string;
-    features?: Array<{
-      title?: string;
-      text?: string;
-      _type: "feature";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "imageFieldType";
-      _key: string;
-    }>;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  } | {
-    _key: string;
-    _type: "textAndImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  }> | null;
 } | {
   _id: string;
   _type: "faq";
@@ -1963,148 +1623,6 @@ export type HOME_PAGE_QUERYResult = {
     noIndex: false;
   };
   pageBuilder: null;
-} | {
-  _id: string;
-  _type: "genericPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  seo: {
-    title: string | null;
-    description: string | "";
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    noIndex: boolean | false;
-  };
-  pageBuilder: Array<{
-    _key: string;
-    _type: "faqs";
-    title?: string;
-    faqs: Array<{
-      _id: string;
-      title: string | null;
-      body: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: "imageFieldType";
-        _key: string;
-      }> | null;
-      text: string;
-    }> | null;
-  } | {
-    _key: string;
-    _type: "features";
-    title?: string;
-    features?: Array<{
-      title?: string;
-      text?: string;
-      _type: "feature";
-      _key: string;
-    }>;
-  } | {
-    _key: string;
-    _type: "hero";
-    title?: string;
-    text?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "imageFieldType";
-      _key: string;
-    }>;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  } | {
-    _key: string;
-    _type: "textAndImage";
-    orientation?: "imageLeft" | "imageRight";
-    title?: string;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        url: string | null;
-        dimensions: null;
-      } | null;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string | null;
-      _type: "imageFieldType";
-    } | null;
-  }> | null;
 } | {
   _id: string;
   _type: "globalSettings";
@@ -2339,7 +1857,149 @@ export type HOME_PAGE_QUERYResult = {
   pageBuilder: null;
 } | {
   _id: string;
-  _type: "productPage";
+  _type: "pageTypeOne";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  seo: {
+    title: string | null;
+    description: string | "";
+    image: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    noIndex: boolean | false;
+  };
+  pageBuilder: Array<{
+    _key: string;
+    _type: "faqs";
+    title?: string;
+    faqs: Array<{
+      _id: string;
+      title: string | null;
+      body: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "imageFieldType";
+        _key: string;
+      }> | null;
+      text: string;
+    }> | null;
+  } | {
+    _key: string;
+    _type: "features";
+    title?: string;
+    features?: Array<{
+      title?: string;
+      text?: string;
+      _type: "feature";
+      _key: string;
+    }>;
+  } | {
+    _key: string;
+    _type: "hero";
+    title?: string;
+    text?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "imageFieldType";
+      _key: string;
+    }>;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "imageFieldType";
+    } | null;
+  } | {
+    _key: string;
+    _type: "textAndImage";
+    orientation?: "imageLeft" | "imageRight";
+    title?: string;
+    image: {
+      asset: {
+        _id: string;
+        _type: "sanity.imageAsset";
+        url: string | null;
+        dimensions: null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "imageFieldType";
+    } | null;
+  }> | null;
+} | {
+  _id: string;
+  _type: "pageTypeTwo";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
