@@ -16,6 +16,20 @@ import { apiVersion, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schema-types";
 import { structure } from "./src/sanity/structure";
 
+// Shared configuration for newDocumentOptions
+const filteredDocumentTypes = [
+  "globalSettings", // Singleton
+  "homePage", // Singleton
+  "navigation", // Singleton
+  "notFoundPage", // Singleton
+  "basePage", // Base type, not meant to be created directly
+  "seo", // Utility type
+  "imageField", // Utility type
+  "richText", // Utility type
+  "redirect", // Utility type
+  "navigationLink", // Utility type
+];
+
 export default defineConfig([
   {
     name: "production",
@@ -38,7 +52,7 @@ export default defineConfig([
       types: schema,
     },
     document: {
-      newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
+      newDocumentOptions: prev => prev.filter(item => !filteredDocumentTypes.includes(item.templateId)),
     },
   },
   // TODO: set up testing environment?
@@ -64,7 +78,7 @@ export default defineConfig([
       types: schema,
     },
     document: {
-      newDocumentOptions: prev => prev.filter(item => item.templateId !== "globalSettings"),
+      newDocumentOptions: prev => prev.filter(item => !filteredDocumentTypes.includes(item.templateId)),
     },
   },
 ]);
