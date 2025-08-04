@@ -21,7 +21,7 @@
     "clsx": "^2.1.1",
     "lint-staged": "^16.1.2",
     "next": "15.2.4",
-    "next-sanity": "^9.9.5",
+    "next-sanity": "^10.0.7",
     "react": "^19.0.0",
     "react-dom": "^19.1.0",
     "sanity": "^4.2.0",
