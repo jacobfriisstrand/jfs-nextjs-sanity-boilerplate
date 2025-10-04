@@ -30,16 +30,7 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  experimental: {
-    turbo: {
-      rules: {
-        "*.svg": {
-          loaders: ["@svgr/webpack"],
-          as: "*.ts",
-        },
-      },
-    },
-  },
+
   images: {
     remotePatterns: [
       {
@@ -48,11 +39,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
   devIndicators: false,
+
   async redirects() {
     return await fetchRedirects();
   },
 
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.ts",
+      },
+    },
+  },
 };
 
 export default nextConfig;
