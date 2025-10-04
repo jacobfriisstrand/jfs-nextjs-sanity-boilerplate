@@ -1,0 +1,9 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+- NEVER suggest to run `npm run dev` or `npm run build`. The developer will ALWAYS do this manually.
+
+- ALWAYS use kebab-case for file names.
