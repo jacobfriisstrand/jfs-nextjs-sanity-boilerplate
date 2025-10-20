@@ -3,7 +3,6 @@
 ### Creating the Token
 
 1. Access Sanity Manage in one of two ways:
-
    - Click the menu in the top right of Sanity Studio and select "Manage project"
    - Run `npx sanity@latest manage` in your terminal
 
