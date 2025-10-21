@@ -1,0 +1,47 @@
+@theme {
+  --font-*: initial;
+  --text-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  --font-serif: serif;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-100: 100%;
+  --leading-105: 105%;
+  --leading-110: 110%;
+  --leading-115: 115%;
+  --leading-130: 130%;
+  --leading-140: 140%;
+  --leading-150: 150%;
+
+  /* Font Sizes (T-Shirt Scale) */
+  --text-xs: 0.875rem; /* 14px */
+  --text-sm: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 2rem; /* 32px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 2.25rem; /* 36px */
+  --text-3xl: 1.375rem; /* 22px */
+  --text-4xl: 2.75rem; /* 44px */
+  --text-5xl: 1.75rem; /* 28px */
+  --text-6xl: 4.25rem; /* 68px */
+
+  /* Letter Spacing (Inspired by Tailwind CSS) */
+  --tracking-wider: 0.05rem;
+  --tracking-wide: 0.01rem;
+  --tracking-normal: 0rem;
+  --tracking-snug: -0.015rem;
+  --tracking-tight: -0.0325rem;
+  --tracking-tighter: -0.05rem;
+  --tracking-extra-tight: -0.075rem;
+  --tracking-ultra-tight: -0.08rem;
+  --tracking-tightest: -0.225rem;
+}

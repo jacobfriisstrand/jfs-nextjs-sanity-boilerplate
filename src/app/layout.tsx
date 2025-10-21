@@ -1,9 +1,8 @@
-import "@/app/globals.css";
+import "@/app/styles/globals.css";
 
 import type { Metadata } from "next";
 
 import { groq } from "next-sanity";
-import localFont from "next/font/local";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
@@ -42,29 +41,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const plain = localFont({
-  variable: "--font-plain",
-  src: [
-    {
-      path: "../../public/fonts/plain-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/plain-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-});
-
-const bodoni = localFont({
-  variable: "--font-bodoni",
-  src: "../../public/fonts/bodoni.woff2",
-  weight: "400",
-  style: "normal",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -73,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased ${plain.variable} ${bodoni.variable} grid min-h-dvh grid-rows-[auto_1fr_auto]`}
+        className="antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]"
       >
         {children}
       </body>
