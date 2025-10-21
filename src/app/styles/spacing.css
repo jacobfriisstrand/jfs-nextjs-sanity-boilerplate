@@ -1,4 +1,6 @@
 @theme {
+  --spacing-*: initial;
+
   --spacing-container: 1440px;
 
   --spacing-4: 0.25rem;

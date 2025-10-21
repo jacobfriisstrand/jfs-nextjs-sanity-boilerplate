@@ -3,4 +3,5 @@
 @import "./spacing.css";
 @import "./typography.css";
 @import "./colors.css";
+@import "./animations.css";
 @plugin "@tailwindcss/typography";
