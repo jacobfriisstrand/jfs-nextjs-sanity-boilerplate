@@ -1,4 +1,4 @@
-import { defineLive } from "next-sanity";
+import { defineLive } from "next-sanity/live";
 
 // import your local configured client
 import { client } from "@/sanity/lib/client";
