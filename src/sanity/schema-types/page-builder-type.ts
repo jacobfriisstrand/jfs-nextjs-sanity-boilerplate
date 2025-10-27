@@ -4,10 +4,7 @@ export const pageBuilderType = defineType({
   name: "pageBuilder",
   type: "array",
   of: [
-    defineArrayMember({ type: "hero" }),
     defineArrayMember({ type: "textAndImage" }),
-    defineArrayMember({ type: "features" }),
-    defineArrayMember({ type: "faqs" }),
   ],
 
   // Possibilty for adding custom image previews (screenshots) of each component in the page builder.

@@ -27,19 +27,6 @@ const SEO_QUERY = `
 
 const CONTENT_QUERY = `pageBuilder[]{
   ...,
-  _type == "faqs" => {
-    ...,
-    faqs[]->{
-    _id,
-    title,
-    body,
-    "text": pt::text(body)
-}
-  },
-  _type == "hero" => {
-    ...,
-    image ${IMAGE_QUERY}
-  },
   _type == "textAndImage" => {
     ...,
     image ${IMAGE_QUERY}

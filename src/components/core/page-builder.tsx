@@ -4,10 +4,7 @@ import { createDataAttribute } from "next-sanity";
 
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
-import { FAQs } from "@/components/faqs";
-import { Features } from "@/components/features";
-import { Hero } from "@/components/hero";
-import { TextAndImage } from "@/components/text-and-image";
+import { TextAndImage } from "@/components/modules/text-and-image";
 import { createDataAttributeConfig } from "@/sanity/lib/data-attribute-config";
 
 type PageBuilderProps = {
@@ -61,28 +58,10 @@ export function PageBuilder({
     >
       {blocks.map((block) => {
         switch (block._type) {
-          case "hero":
-            return (
-              <DragHandle key={block._key} blockKey={block._key} documentId={documentId} documentType={documentType}>
-                <Hero {...block} />
-              </DragHandle>
-            );
-          case "features":
-            return (
-              <DragHandle key={block._key} blockKey={block._key} documentId={documentId} documentType={documentType}>
-                <Features {...block} />
-              </DragHandle>
-            );
           case "textAndImage":
             return (
               <DragHandle key={block._key} blockKey={block._key} documentId={documentId} documentType={documentType}>
                 <TextAndImage {...block} />
-              </DragHandle>
-            );
-          case "faqs":
-            return (
-              <DragHandle key={block._key} blockKey={block._key} documentId={documentId} documentType={documentType}>
-                <FAQs {...block} />
               </DragHandle>
             );
           default:
