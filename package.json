@@ -25,7 +25,7 @@
     "next": "15.5.4",
     "next-sanity": "^11.5.6",
     "react": "^19.0.0",
-    "react-dom": "^19.1.1",
+    "react-dom": "^19.2.0",
     "sanity": "^4.10.3",
     "schema-dts": "^1.1.5",
     "styled-components": "^6.1.16",
