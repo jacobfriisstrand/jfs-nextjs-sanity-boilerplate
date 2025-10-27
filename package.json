@@ -13,7 +13,8 @@
     "prebuild": "npm run typegen",
     "typegen": "sanity schema extract --workspace=development --path=./src/sanity/extract.json && sanity typegen generate",
     "create:pagetype": "npx tsx scripts/create-page-type.ts",
-    "create:module": "npx tsx scripts/create-module.ts"
+    "create:module": "npx tsx scripts/create-module.ts",
+    "setup:project": "npx tsx scripts/setup-project.ts"
   },
   "dependencies": {
     "@antfu/eslint-config": "^4.11.0",
