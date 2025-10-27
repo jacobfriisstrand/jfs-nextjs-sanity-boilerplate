@@ -1,11 +1,12 @@
 import type { StructureResolver } from "sanity/structure";
 
+import { PAGE_TYPES } from "@/sanity/constants/page-types";
+
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = S =>
   S.list()
     .title("Menu")
     .items([
-      S.documentTypeListItem("faq").title("FAQs"),
       S.divider().title("Pages"),
       S.listItem()
         .id("homePage")
@@ -17,8 +18,17 @@ export const structure: StructureResolver = S =>
             .schemaType("homePage")
             .documentId("homePage"),
         ),
-      S.documentTypeListItem("pageTypeOne").title("Page type one"),
-      S.documentTypeListItem("pageTypeTwo").title("Page type two"),
+      // Dynamically add page types from PAGE_TYPES constant
+      ...PAGE_TYPES
+        .filter(pageType => pageType !== "homePage" && pageType !== "notFoundPage")
+        .map(pageType =>
+          S.documentTypeListItem(pageType).title(
+            pageType
+              .replace(/([A-Z])/g, " $1") // Add space before capital letters
+              .toLowerCase() // Convert to lowercase
+              .replace(/^./, str => str.toUpperCase()), // Capitalize first letter only
+          ),
+        ),
       S.divider().title("Settings"),
       S.listItem()
         .title("Global settings")
@@ -52,6 +62,6 @@ export const structure: StructureResolver = S =>
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["pageTypeOne", "faq", "globalSettings", "basePage", "homePage", "pageTypeTwo", "navigation", "notFoundPage"].includes(item.getId()!),
+          && !["globalSettings", "basePage", "homePage", "navigation", "notFoundPage", ...PAGE_TYPES].includes(item.getId()!),
       ),
     ]);
