@@ -1,6 +1,6 @@
 import type { PortableTextComponents } from "next-sanity";
 
-import { SanityImage } from "@/components/core/sanity-image";
+import { SanityImage } from "@/components/core/image";
 
 export const components: PortableTextComponents = {
   types: {

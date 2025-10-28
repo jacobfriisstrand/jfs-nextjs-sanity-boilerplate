@@ -3,17 +3,7 @@ import { defineQuery } from "next-sanity";
 const IMAGE_QUERY = `{
   ...,
   alt,
-  asset-> {
-    _id,
-    _type,
-    url,
-    dimensions {
-      _type,
-      aspectRatio,
-      height,
-      width
-    }
-  }
+  asset-> { url }
 }`;
 
 const SEO_QUERY = `
