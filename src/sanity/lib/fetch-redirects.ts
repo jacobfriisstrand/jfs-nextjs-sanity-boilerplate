@@ -6,8 +6,8 @@ export async function fetchRedirects() {
 
   // Filter out any redirects with null values and ensure they match Next.js redirect format
   return redirects
-    .filter(redirect => redirect.source && redirect.destination)
-    .map(redirect => ({
+    .filter((redirect: any) => redirect.source && redirect.destination)
+    .map((redirect: any) => ({
       source: redirect.source as string,
       destination: redirect.destination as string,
       permanent: redirect.permanent ?? true,

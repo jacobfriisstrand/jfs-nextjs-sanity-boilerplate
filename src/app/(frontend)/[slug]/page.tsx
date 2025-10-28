@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 
-import { PageBuilderWrapper } from "@/components/page-builder-wrapper";
+import { PageBuilderWrapper } from "@/components/core/page-builder-wrapper";
 import { PAGE_TYPES } from "@/sanity/constants/page-types";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";

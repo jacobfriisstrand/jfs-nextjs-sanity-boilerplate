@@ -30,55 +30,29 @@ const filteredDocumentTypes = [
   "navigationLink", // Utility type
 ];
 
-export default defineConfig([
-  {
-    name: "production",
-    title: isDev ? "Production" : "Template Company",
-    basePath: "/admin",
-    projectId,
-    dataset: "production",
-    plugins: [
-      structureTool({ structure }),
-      presentationTool({
-        resolve,
-        previewUrl: {
-          previewMode: {
-            enable: "/api/draft-mode/enable",
-          },
+export default defineConfig({
+  name: "default",
+  // TODO: Change this to the actual company name
+  title: isDev ? "Development" : "Template Company",
+  basePath: "/admin",
+  projectId,
+  dataset: isDev ? "development" : "production",
+  plugins: [
+    structureTool({ structure }),
+    ...(isDev ? [visionTool({ defaultApiVersion: apiVersion })] : []),
+    presentationTool({
+      resolve,
+      previewUrl: {
+        previewMode: {
+          enable: "/api/draft-mode/enable",
         },
-      }),
-    ],
-    schema: {
-      types: schema,
-    },
-    document: {
-      newDocumentOptions: prev => prev.filter(item => !filteredDocumentTypes.includes(item.templateId)),
-    },
+      },
+    }),
+  ],
+  schema: {
+    types: schema,
   },
-  // TODO: set up testing environment?
-  {
-    name: "development",
-    title: "Development",
-    basePath: "/admin-dev",
-    projectId,
-    dataset: "development",
-    plugins: [
-      structureTool({ structure }),
-      visionTool({ defaultApiVersion: apiVersion }),
-      presentationTool({
-        resolve,
-        previewUrl: {
-          previewMode: {
-            enable: "/api/draft-mode/enable",
-          },
-        },
-      }),
-    ],
-    schema: {
-      types: schema,
-    },
-    document: {
-      newDocumentOptions: prev => prev.filter(item => !filteredDocumentTypes.includes(item.templateId)),
-    },
+  document: {
+    newDocumentOptions: prev => prev.filter(item => !filteredDocumentTypes.includes(item.templateId)),
   },
-]);
+});

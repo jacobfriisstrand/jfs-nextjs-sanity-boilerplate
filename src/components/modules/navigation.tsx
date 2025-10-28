@@ -1,6 +1,6 @@
 import Logo from "@public/assets/template-logo.svg";
-import Link from "next/link";
 
+import { Link } from "@/components/ui/link";
 import { getNavigationHref, transformNavigationLinks } from "@/lib/utils/transform-navigation-link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { NAVIGATION_QUERY } from "@/sanity/lib/queries";

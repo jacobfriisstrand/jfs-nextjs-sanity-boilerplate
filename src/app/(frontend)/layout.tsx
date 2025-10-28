@@ -1,7 +1,7 @@
-import { VisualEditing } from "next-sanity";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 
-import { DisableDraftMode } from "@/components/disable-draft-mode";
+import { DisableDraftMode } from "@/components/core/disable-draft-mode";
 import Footer from "@/components/modules/footer";
 import Navigation from "@/components/modules/navigation";
 import { SanityLive } from "@/sanity/lib/live";

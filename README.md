@@ -68,17 +68,53 @@ options: {
 
 ## Getting Started
 
-First, run the development server:
+### Quick Setup
+
+For a new project, run the setup script to configure everything automatically:
 
 ```bash
-npm run dev
+npm run setup:project
 ```
+
+This script will:
+
+- Prompt you for your Sanity Project ID and API Read Token
+- Create a `.env` file with the correct configuration
+- Set up a Vercel project (optional)
+- Deploy environment variables to Vercel with proper dataset configuration
+- Generate TypeScript types from Sanity schemas
+
+### Manual Setup
+
+If you prefer to set up manually:
+
+1. Copy the `.env.example` file to create a new `.env` file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Fill in the required environment variables in your `.env` file:
+
+   ```
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+   NEXT_PUBLIC_SANITY_API_READ_TOKEN=your_sanity_api_read_token
+   ```
+
+   You can find these values in your Sanity project settings.
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
 
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 - Open [http://localhost:3000/admin](http://localhost:3000/admin) to edit content.
 
 ## Available Scripts
 
+- `npm run setup:project` - Interactive setup script for new projects
 - `npm run dev` - Start development server with Turbopack
 - `npm run build` - Build for production
 - `npm run start` - Start production server

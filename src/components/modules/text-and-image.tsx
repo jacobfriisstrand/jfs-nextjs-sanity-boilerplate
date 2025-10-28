@@ -2,7 +2,7 @@ import { stegaClean } from "next-sanity";
 
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
-import { SanityImage } from "@/components/sanity-image";
+import { SanityImage } from "@/components/core/sanity-image";
 
 type TextAndImageProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
