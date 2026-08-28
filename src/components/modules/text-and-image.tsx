@@ -2,7 +2,7 @@ import { stegaClean } from "next-sanity";
 
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
-import { SanityImage } from "@/components/core/sanity-image";
+import { Image } from "@/components/core/image";
 
 type TextAndImageProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["pageBuilder"]>[number],
@@ -17,10 +17,14 @@ export function TextAndImage({ title, image, orientation }: TextAndImageProps) {
     >
       {image
         ? (
-            <SanityImage
-              className="w-2/3"
-              image={image}
-              aspectRatio={16 / 9}
+            <Image
+              className="aspect-video"
+              image={{
+                asset: {
+                  url: image.asset?.url || "",
+                },
+                alt: image.alt || "",
+              }}
             />
           )
         : null}
