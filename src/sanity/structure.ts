@@ -21,14 +21,19 @@ export const structure: StructureResolver = S =>
       // Dynamically add page types from PAGE_TYPES constant
       ...PAGE_TYPES
         .filter(pageType => pageType !== "homePage" && pageType !== "notFoundPage")
-        .map(pageType =>
-          S.documentTypeListItem(pageType).title(
-            pageType
+        .map((pageType) => {
+          const customTitles: Record<string, string> = {
+
+          };
+
+          const title = customTitles[pageType]
+            || pageType
               .replace(/([A-Z])/g, " $1") // Add space before capital letters
               .toLowerCase() // Convert to lowercase
-              .replace(/^./, str => str.toUpperCase()), // Capitalize first letter only
-          ),
-        ),
+              .replace(/^./, str => str.toUpperCase()); // Capitalize first letter only
+
+          return S.documentTypeListItem(pageType).title(title);
+        }),
       S.divider().title("Settings"),
       S.listItem()
         .title("Global settings")
@@ -59,9 +64,12 @@ export const structure: StructureResolver = S =>
             .title("Not found page")
             .documentId("notFoundPage"),
         ),
+      S.documentTypeListItem("redirect")
+        .title("Redirects")
+        .icon(() => "🔄"),
       ...S.documentTypeListItems().filter(
         item =>
           item.getId()
-          && !["globalSettings", "basePage", "homePage", "navigation", "notFoundPage", ...PAGE_TYPES].includes(item.getId()!),
+          && !["globalSettings", "basePage", "homePage", "navigation", "notFoundPage", "redirect", ...PAGE_TYPES].includes(item.getId()!),
       ),
     ]);
