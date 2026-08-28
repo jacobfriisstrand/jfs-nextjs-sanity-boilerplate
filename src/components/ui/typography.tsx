@@ -24,8 +24,8 @@ export const headingVariants = cva("", {
   },
 });
 
-type HeadingProps = ComponentPropsWithRef<"h1"> &
-  VariantProps<typeof headingVariants> & {
+type HeadingProps = ComponentPropsWithRef<"h1">
+  & VariantProps<typeof headingVariants> & {
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   };
 
@@ -67,8 +67,8 @@ export const paragraphVariants = cva("leading-110", {
   },
 });
 
-type ParagraphProps = ComponentPropsWithRef<"p"> &
-  VariantProps<typeof paragraphVariants> & {
+type ParagraphProps = ComponentPropsWithRef<"p">
+  & VariantProps<typeof paragraphVariants> & {
     as?: "p" | "span" | "small";
   };
 

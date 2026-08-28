@@ -21,8 +21,8 @@ const containerVariants = cva(
   },
 );
 
-type ContainerProps = ComponentPropsWithoutRef<"section"> &
-  VariantProps<typeof containerVariants> & {
+type ContainerProps = ComponentPropsWithoutRef<"section">
+  & VariantProps<typeof containerVariants> & {
     asChild?: boolean;
     fluid?: boolean;
   };
