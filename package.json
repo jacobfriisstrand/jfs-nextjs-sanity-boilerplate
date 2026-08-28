@@ -11,7 +11,7 @@
     "prepare": "husky",
     "predev": "npm run typegen",
     "prebuild": "npm run typegen",
-    "typegen": "sanity schema extract --workspace=development --path=./src/sanity/extract.json && sanity typegen generate",
+    "typegen": "sanity schema extract --workspace=development --path=./src/sanity/extract.json --force && sanity typegen generate",
     "create:pagetype": "npx tsx scripts/create-page-type.ts",
     "create:module": "npx tsx scripts/create-module.ts",
     "setup:project": "npx tsx scripts/setup-project.ts"
@@ -26,10 +26,10 @@
     "clsx": "^2.1.1",
     "lint-staged": "^16.1.2",
     "next": "16.3.3",
-    "next-sanity": "^11.6.2",
+    "next-sanity": "^13.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.2.0",
-    "sanity": "^4.10.3",
+    "sanity": "^6.11.0",
     "schema-dts": "^1.1.5",
     "styled-components": "^6.5.3",
     "tailwind-merge": "^3.3.1"

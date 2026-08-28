@@ -1,14 +1,16 @@
 "use client";
 
+import type { StegaBranded } from "next-sanity";
+
 import { createDataAttribute } from "next-sanity";
 
-import type { PAGE_QUERYResult } from "@/sanity/types";
+import type { PAGE_QUERY_RESULT } from "@/sanity/types";
 
 import { TextAndImage } from "@/components/modules/text-and-image";
 import { createDataAttributeConfig } from "@/sanity/lib/data-attribute-config";
 
 type PageBuilderProps = {
-  modules: NonNullable<PAGE_QUERYResult>["pageBuilder"];
+  modules: StegaBranded<NonNullable<PAGE_QUERY_RESULT>["pageBuilder"]>;
   documentId: string;
   documentType: string;
 };

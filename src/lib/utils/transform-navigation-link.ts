@@ -1,3 +1,7 @@
+import type { StegaBranded } from "next-sanity";
+
+import { stegaClean } from "next-sanity";
+
 import type { NavigationLink } from "@/sanity/types";
 
 type SanityNavigationLink = {
@@ -28,18 +32,20 @@ export function getNavigationHref(link: ExtendedNavigationLink): string {
   return link.url || "/";
 }
 
-export function transformNavigationLinks(links: SanityNavigationLink[] | null | undefined): ExtendedNavigationLink[] {
+export function transformNavigationLinks(
+  links: StegaBranded<SanityNavigationLink>[] | null | undefined,
+): ExtendedNavigationLink[] {
   return links?.map(link => ({
     ...link,
-    label: link.label ?? undefined,
-    linkType: link.linkType ?? undefined,
-    url: link.url ?? undefined,
+    label: stegaClean(link.label) ?? undefined,
+    linkType: stegaClean(link.linkType) ?? undefined,
+    url: stegaClean(link.url) ?? undefined,
     page: link.page
       ? {
           _ref: link.page._id,
           _type: "reference" as const,
           _weak: false,
-          slug: link.page.slug ?? undefined,
+          slug: stegaClean(link.page.slug) ?? undefined,
         }
       : undefined,
   })) ?? [];
