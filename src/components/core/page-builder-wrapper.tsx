@@ -1,9 +1,9 @@
-import type { PAGE_QUERYResult } from "@/sanity/types";
+import type { PAGE_QUERY_RESULT } from "@/sanity/types";
 
 import { PageBuilder } from "@/components/core/page-builder";
 
 type PageBuilderWrapperProps = {
-  modules: NonNullable<PAGE_QUERYResult>["pageBuilder"];
+  modules: NonNullable<PAGE_QUERY_RESULT>["pageBuilder"];
   documentId: string;
   documentType: string;
 };

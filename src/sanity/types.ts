@@ -12,25 +12,29 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
+// Source: src/sanity/extract.json
+export type HomePageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "homePage";
+};
+
+export type NotFoundPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "notFoundPage";
+};
+
 export type NavigationLink = {
   _type: "navigationLink";
   label?: string;
   linkType?: "internal" | "external";
   url?: string;
-  page?:
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "homePage";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "notFoundPage";
-      };
+  page?: HomePageReference | NotFoundPageReference;
 };
 
 export type Redirect = {
@@ -74,6 +78,13 @@ export type HomePage = {
   >;
 };
 
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type GlobalSettings = {
   _id: string;
   _type: "globalSettings";
@@ -82,12 +93,7 @@ export type GlobalSettings = {
   _rev: string;
   companyName?: string;
   favicon?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -115,6 +121,22 @@ export type GlobalSettings = {
   };
 };
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type Navigation = {
   _id: string;
   _type: "navigation";
@@ -132,19 +154,16 @@ export type TextAndImage = {
   _type: "textAndImage";
   orientation?: "imageLeft" | "imageRight";
   title?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "imageFieldType";
-  };
+  image?: ImageFieldType;
+};
+
+export type ImageFieldType = {
+  _type: "imageFieldType";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
 };
 
 export type RichText = Array<
@@ -166,34 +185,23 @@ export type RichText = Array<
       _type: "block";
       _key: string;
     }
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "imageFieldType";
+  | ({
       _key: string;
-    }
+    } & ImageFieldType)
 >;
 
-export type ImageFieldType = {
-  _type: "imageFieldType";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
+  noIndex?: boolean;
 };
 
 export type BasePage = {
@@ -207,23 +215,10 @@ export type BasePage = {
   seo?: Seo;
 };
 
-export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  noIndex?: boolean;
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -252,20 +247,16 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -288,6 +279,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -313,17 +311,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -331,47 +318,37 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type AllSanitySchemaTypes =
+  | HomePageReference
+  | NotFoundPageReference
   | NavigationLink
   | Redirect
   | NotFoundPage
   | HomePage
+  | SanityImageAssetReference
   | GlobalSettings
+  | SanityImageCrop
+  | SanityImageHotspot
   | Navigation
   | TextAndImage
-  | RichText
   | ImageFieldType
-  | BasePage
+  | RichText
   | Seo
+  | BasePage
+  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
-  | SanityAssetSourceData;
-export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/sanity/lib/queries.ts
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type in $pageTypes && slug.current == $slug][0]{  ...,    "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  pageBuilder[]{  ...,  _type == "textAndImage" => {    ...,    image {  ...,  alt,  asset-> { url }}  }}}
-export type PAGE_QUERYResult =
+export type PAGE_QUERY_RESULT =
   | {
       _id: string;
       _type: "basePage";
@@ -384,12 +361,7 @@ export type PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -407,12 +379,7 @@ export type PAGE_QUERYResult =
       _rev: string;
       companyName?: string;
       favicon?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
@@ -458,12 +425,7 @@ export type PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -477,6 +439,7 @@ export type PAGE_QUERYResult =
         orientation?: "imageLeft" | "imageRight";
         title?: string;
         image: {
+          _type: "imageFieldType";
           asset: {
             url: string | null;
           } | null;
@@ -484,7 +447,6 @@ export type PAGE_QUERYResult =
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt: string | null;
-          _type: "imageFieldType";
         } | null;
       }> | null;
     }
@@ -519,12 +481,7 @@ export type PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -612,11 +569,13 @@ export type PAGE_QUERYResult =
       pageBuilder: null;
     }
   | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: NOT_FOUND_PAGE_QUERY
 // Query: *[_id == "notFoundPage"][0]{  ...,    "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },  heading,  subheading,}
-export type NOT_FOUND_PAGE_QUERYResult =
+export type NOT_FOUND_PAGE_QUERY_RESULT =
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "basePage";
       _createdAt: string;
       _updatedAt: string;
@@ -627,12 +586,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -644,19 +598,14 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "globalSettings";
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       companyName?: string;
       favicon?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
@@ -692,7 +641,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "homePage";
       _createdAt: string;
       _updatedAt: string;
@@ -703,12 +652,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -725,7 +669,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "navigation";
       _createdAt: string;
       _updatedAt: string;
@@ -745,7 +689,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "notFoundPage";
       _createdAt: string;
       _updatedAt: string;
@@ -756,12 +700,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -773,7 +712,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: string | null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "redirect";
       _createdAt: string;
       _updatedAt: string;
@@ -792,7 +731,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "sanity.fileAsset";
       _createdAt: string;
       _updatedAt: string;
@@ -821,7 +760,7 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | {
-      _id: string;
+      _id: "notFoundPage";
       _type: "sanity.imageAsset";
       _createdAt: string;
       _updatedAt: string;
@@ -851,9 +790,11 @@ export type NOT_FOUND_PAGE_QUERYResult =
       subheading: null;
     }
   | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: NAVIGATION_QUERY
 // Query: *[_type == "navigation"][0]{  ...,  menu[]{    _type,    "label": select(label == null => undefined, label),    "linkType": select(linkType == null => undefined, linkType),    "url": select(url == null => undefined, url),    "page": page->{      _id,      _type,      "slug": slug.current    }  },}
-export type NAVIGATION_QUERYResult = {
+export type NAVIGATION_QUERY_RESULT = {
   _id: string;
   _type: "navigation";
   _createdAt: string;
@@ -878,11 +819,13 @@ export type NAVIGATION_QUERYResult = {
       | null;
   }> | null;
 } | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
 // Query: *[_id == "homePage"][0]{    ...,      "seo": {    "title": seo.title,    "description": coalesce(seo.description,  ""),    "image": seo.image,    "noIndex": seo.noIndex == true  },    pageBuilder[]{  ...,  _type == "textAndImage" => {    ...,    image {  ...,  alt,  asset-> { url }}  }}  }
-export type HOME_PAGE_QUERYResult =
+export type HOME_PAGE_QUERY_RESULT =
   | {
-      _id: string;
+      _id: "homePage";
       _type: "basePage";
       _createdAt: string;
       _updatedAt: string;
@@ -893,12 +836,7 @@ export type HOME_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -909,19 +847,14 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "globalSettings";
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       companyName?: string;
       favicon?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
+        asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
@@ -956,7 +889,7 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "homePage";
       _createdAt: string;
       _updatedAt: string;
@@ -967,12 +900,7 @@ export type HOME_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -986,6 +914,7 @@ export type HOME_PAGE_QUERYResult =
         orientation?: "imageLeft" | "imageRight";
         title?: string;
         image: {
+          _type: "imageFieldType";
           asset: {
             url: string | null;
           } | null;
@@ -993,12 +922,11 @@ export type HOME_PAGE_QUERYResult =
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt: string | null;
-          _type: "imageFieldType";
         } | null;
       }> | null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "navigation";
       _createdAt: string;
       _updatedAt: string;
@@ -1017,7 +945,7 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "notFoundPage";
       _createdAt: string;
       _updatedAt: string;
@@ -1028,12 +956,7 @@ export type HOME_PAGE_QUERYResult =
         title: string | null;
         description: string | "";
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -1046,7 +969,7 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "redirect";
       _createdAt: string;
       _updatedAt: string;
@@ -1064,7 +987,7 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "sanity.fileAsset";
       _createdAt: string;
       _updatedAt: string;
@@ -1092,7 +1015,7 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | {
-      _id: string;
+      _id: "homePage";
       _type: "sanity.imageAsset";
       _createdAt: string;
       _updatedAt: string;
@@ -1121,16 +1044,20 @@ export type HOME_PAGE_QUERYResult =
       pageBuilder: null;
     }
   | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: REDIRECTS_QUERY
 // Query: *[_type == "redirect" && isEnabled == true] {      source,      destination,      permanent  }
-export type REDIRECTS_QUERYResult = Array<{
+export type REDIRECTS_QUERY_RESULT = Array<{
   source: string | null;
   destination: string | null;
   permanent: boolean | null;
 }>;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: OG_IMAGE_QUERY
 // Query: *[_id == $id][0]{    title,    "image": seo.image {      ...,      asset-> {        _id,        _type,        url,        metadata {          palette        }      }    }  }
-export type OG_IMAGE_QUERYResult =
+export type OG_IMAGE_QUERY_RESULT =
   | {
       title: null;
       image: null;
@@ -1157,9 +1084,11 @@ export type OG_IMAGE_QUERYResult =
       } | null;
     }
   | null;
+
+// Source: src/sanity/lib/queries.ts
 // Variable: SITEMAP_QUERY
 // Query: *[_type in $pageTypes && defined(slug.current)] {    "href": select(      _type == $pageTypes[0] => "/" + slug.current,      slug.current    ),    _updatedAt}
-export type SITEMAP_QUERYResult = Array<{
+export type SITEMAP_QUERY_RESULT = Array<{
   href: string | null;
   _updatedAt: string;
 }>;
@@ -1168,12 +1097,12 @@ export type SITEMAP_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type in $pageTypes && slug.current == $slug][0]{\n  ...,\n  \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n  pageBuilder[]{\n  ...,\n  _type == "textAndImage" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> { url }\n}\n  }\n}\n}': PAGE_QUERYResult;
-    '*[_id == "notFoundPage"][0]{\n  ...,\n  \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n  heading,\n  subheading,\n}': NOT_FOUND_PAGE_QUERYResult;
-    '*[_type == "navigation"][0]{\n  ...,\n  menu[]{\n    _type,\n    "label": select(label == null => undefined, label),\n    "linkType": select(linkType == null => undefined, linkType),\n    "url": select(url == null => undefined, url),\n    "page": page->{\n      _id,\n      _type,\n      "slug": slug.current\n    }\n  },\n}': NAVIGATION_QUERYResult;
-    '*[_id == "homePage"][0]{\n    ...,\n    \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n    pageBuilder[]{\n  ...,\n  _type == "textAndImage" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> { url }\n}\n  }\n}\n  }': HOME_PAGE_QUERYResult;
-    '\n  *[_type == "redirect" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n': REDIRECTS_QUERYResult;
-    '\n  *[_id == $id][0]{\n    title,\n    "image": seo.image {\n      ...,\n      asset-> {\n        _id,\n        _type,\n        url,\n        metadata {\n          palette\n        }\n      }\n    }\n  }    \n': OG_IMAGE_QUERYResult;
-    '\n*[_type in $pageTypes && defined(slug.current)] {\n    "href": select(\n      _type == $pageTypes[0] => "/" + slug.current,\n      slug.current\n    ),\n    _updatedAt\n}\n': SITEMAP_QUERYResult;
+    '*[_type in $pageTypes && slug.current == $slug][0]{\n  ...,\n  \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n  pageBuilder[]{\n  ...,\n  _type == "textAndImage" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> { url }\n}\n  }\n}\n}': PAGE_QUERY_RESULT;
+    '*[_id == "notFoundPage"][0]{\n  ...,\n  \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n  heading,\n  subheading,\n}': NOT_FOUND_PAGE_QUERY_RESULT;
+    '*[_type == "navigation"][0]{\n  ...,\n  menu[]{\n    _type,\n    "label": select(label == null => undefined, label),\n    "linkType": select(linkType == null => undefined, linkType),\n    "url": select(url == null => undefined, url),\n    "page": page->{\n      _id,\n      _type,\n      "slug": slug.current\n    }\n  },\n}': NAVIGATION_QUERY_RESULT;
+    '*[_id == "homePage"][0]{\n    ...,\n    \n  "seo": {\n    "title": seo.title,\n    "description": coalesce(seo.description,  ""),\n    "image": seo.image,\n    "noIndex": seo.noIndex == true\n  },\n\n    pageBuilder[]{\n  ...,\n  _type == "textAndImage" => {\n    ...,\n    image {\n  ...,\n  alt,\n  asset-> { url }\n}\n  }\n}\n  }': HOME_PAGE_QUERY_RESULT;
+    '\n  *[_type == "redirect" && isEnabled == true] {\n      source,\n      destination,\n      permanent\n  }\n': REDIRECTS_QUERY_RESULT;
+    '\n  *[_id == $id][0]{\n    title,\n    "image": seo.image {\n      ...,\n      asset-> {\n        _id,\n        _type,\n        url,\n        metadata {\n          palette\n        }\n      }\n    }\n  }    \n': OG_IMAGE_QUERY_RESULT;
+    '\n*[_type in $pageTypes && defined(slug.current)] {\n    "href": select(\n      _type == $pageTypes[0] => "/" + slug.current,\n      slug.current\n    ),\n    _updatedAt\n}\n': SITEMAP_QUERY_RESULT;
   }
 }
