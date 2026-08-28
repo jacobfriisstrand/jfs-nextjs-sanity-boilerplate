@@ -67,7 +67,7 @@ export async function GET(request: Request) {
           {/* Image container */}
           {hasImage && (
             <div tw="flex w-[500px] h-[630px] overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* eslint-disable-next-line next/no-img-element */}
               <img
                 src={data.image ? urlFor(data.image).width(500).height(630).url() : ""}
                 alt=""
